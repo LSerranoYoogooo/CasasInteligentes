@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Yoogooo Smart Home</string>
+    <string name="user_name">Nombre de Usuario</string>
+    <string name="user_pass">Contraseña</string>
+    <string name="btn_login">Iniciar</string>
+    <string name="new_user_titu">Nuevo Usuario</string>
+    <string name="name_user">Nombre</string>
+    <string name="lastName_user">Apellidos</string>
+    <string name="email">Email</string>
+    <string name="user_nameLogin">Nombre de Usuario</string>
+    <string name="user_passLogin">Contraseña</string>
+    <string name="register">Registrar</string>
 </resources>
