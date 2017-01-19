@@ -16,16 +16,14 @@ public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.SiteViewHolder
     private List<SiteControl> items;
 
     public static class SiteViewHolder extends RecyclerView.ViewHolder {
-        // Campos respectivos de un item
+        // Campos respectivos para cada site
         public ImageView image;
         public TextView title;
-        public ImageView state;
 
         public SiteViewHolder(View v) {
             super(v);
             image = (ImageView) v.findViewById(R.id.image);
             title = (TextView) v.findViewById(R.id.title);
-            state = (ImageView) v.findViewById(R.id.state);
         }
     }
 
@@ -50,6 +48,5 @@ public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.SiteViewHolder
     public void onBindViewHolder(SiteViewHolder viewHolder, int i) {
         viewHolder.image.setImageResource(items.get(i).getImage());
         viewHolder.title.setText(items.get(i).getTitle());
-        viewHolder.state.setImageResource(R.drawable.logo_gif);
     }
 }

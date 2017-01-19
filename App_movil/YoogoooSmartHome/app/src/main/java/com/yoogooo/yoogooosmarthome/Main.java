@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,15 +31,16 @@ public class Main extends AppCompatActivity {
     Globals globals = Globals.getInstance();
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        res = (TextView) findViewById(R.id.res);
-
-        globals.setItems("Sala", R.drawable.homecontrol, true);
-        globals.setItems("Cocina", R.drawable.homecontrol, true);
-        globals.setItems("Cuarto", R.drawable.homecontrol, true);
 
         loaditems(globals.getItems());
     }
@@ -76,13 +80,35 @@ public class Main extends AppCompatActivity {
                     ArrayList<String> speech = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     String strSpeech2Text = speech.get(0);
+                    /* comando de vos
                     res.setText(strSpeech2Text);
                     globals.setItems(strSpeech2Text, R.drawable.homecontrol, true);
                     loaditems(globals.getItems());
+                    */
                 }
                 break;
             default:
                 break;
         }
+    }
+    //acciones de botones en action bar
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add_site:
+                Intent intent = new Intent(Main.this, AddSite.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.logout:
+                Intent intent2 = new Intent(Main.this, Login.class);
+                startActivity(intent2);
+                finish();
+                break;
+            default:
+                break;
+        }
+
+        return true;
     }
 }

@@ -9,7 +9,6 @@ public class SiteControl {
     public SiteControl(String title, int image, boolean realState) {
         this.title = title;
         this.image = image;
-        this.realState = realState;
     }
 
     public String getTitle() {
@@ -20,7 +19,4 @@ public class SiteControl {
         return image;
     }
 
-    public boolean isRealState() {
-        return realState;
-    }
 }
