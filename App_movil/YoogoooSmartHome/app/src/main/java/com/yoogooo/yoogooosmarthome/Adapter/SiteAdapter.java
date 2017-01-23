@@ -1,5 +1,6 @@
 package com.yoogooo.yoogooosmarthome.Adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.yoogooo.yoogooosmarthome.AddSite;
+import com.yoogooo.yoogooosmarthome.ControlList;
+import com.yoogooo.yoogooosmarthome.Main;
 import com.yoogooo.yoogooosmarthome.Model.SiteControl;
 import com.yoogooo.yoogooosmarthome.R;
 
@@ -23,7 +27,13 @@ public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.SiteViewHolder
         public SiteViewHolder(View v) {
             super(v);
             image = (ImageView) v.findViewById(R.id.image);
-            title = (TextView) v.findViewById(R.id.title);
+            title = (TextView) v.findViewById(R.id.site_name);
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    v.getContext().startActivity(new Intent(v.getContext(),ControlList.class));
+                }
+            });
         }
     }
 
@@ -48,5 +58,6 @@ public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.SiteViewHolder
     public void onBindViewHolder(SiteViewHolder viewHolder, int i) {
         viewHolder.image.setImageResource(items.get(i).getImage());
         viewHolder.title.setText(items.get(i).getTitle());
+
     }
 }

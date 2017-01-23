@@ -10,18 +10,22 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login"/>
-        <activity android:name=".Register"/>
+        <activity android:name=".Login" />
+        <activity android:name=".Register" />
         <activity android:name=".Main" />
-        <activity android:name=".AddSite"></activity>
+        <activity android:name=".AddSite" />
+        <activity android:name=".Controls" />
+        <activity android:name=".ControlList" />
+        <activity android:name=".AddControl"></activity>
     </application>
 
 </manifest>

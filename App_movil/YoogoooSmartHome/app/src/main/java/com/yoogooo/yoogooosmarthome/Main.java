@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends AppCompatActivity {
-    TextView res;
     // Declarar instancias globales para acceder al Recicler
     private RecyclerView recycler;
     private RecyclerView.Adapter adapter;
@@ -34,6 +33,8 @@ public class Main extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
+        MenuItem item = menu.findItem(R.id.add_control);
+        item.setVisible(false);
         return true;
     }
 
@@ -42,13 +43,13 @@ public class Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loaditems(globals.getItems());
+        loadSites(globals.getSites());
     }
-    //encargado de cargar los elementos al reclicler
-    private void loaditems(List items){
+    //encargado de cargar los elementos al reclycler
+    private void loadSites(List items){
         List itemss = items;
         // Obtener el Recycler
-        recycler = (RecyclerView) findViewById(R.id.recicler);
+        recycler = (RecyclerView) findViewById(R.id.recycler);
         recycler.setHasFixedSize(true);
         // Usar un administrador para LinearLayout
         lManager = new GridLayoutManager(this, 2);
@@ -101,14 +102,13 @@ public class Main extends AppCompatActivity {
                 finish();
                 break;
             case R.id.logout:
-                Intent intent2 = new Intent(Main.this, Login.class);
+                Intent intent2 = new Intent(this, Login.class);
                 startActivity(intent2);
                 finish();
                 break;
             default:
                 break;
         }
-
         return true;
     }
 }

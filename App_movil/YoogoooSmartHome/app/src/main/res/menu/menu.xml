@@ -8,9 +8,14 @@
         android:checkable="false"
         android:enabled="true" />
     <item
+        android:id="@+id/add_control"
+        android:icon="@android:drawable/ic_menu_manage"
+        app:showAsAction="always"
+        android:title="" />
+    <item
         android:id="@+id/add_site"
         android:icon="@android:drawable/ic_input_add"
         android:checkable="false"
-        android:showAsAction="always"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:title="" />
 </menu>

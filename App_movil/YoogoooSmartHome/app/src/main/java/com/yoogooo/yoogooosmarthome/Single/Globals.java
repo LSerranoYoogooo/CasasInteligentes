@@ -1,13 +1,17 @@
 package com.yoogooo.yoogooosmarthome.Single;
 
+import com.yoogooo.yoogooosmarthome.Model.Control;
 import com.yoogooo.yoogooosmarthome.Model.SiteControl;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.support.design.R.id.image;
+
 public class Globals {
     private static Globals instance;
     // Global variable
-    List items = new ArrayList();
+    List sites = new ArrayList();
+    List controls = new ArrayList();
     // Restrict the constructor from being instantiated
     private Globals(){}
 
@@ -18,11 +22,19 @@ public class Globals {
         return instance;
     }
 
-    public void setItems(String name, int img, boolean state) {
-        this.items.add(new SiteControl(name, img, state));
+    public void setSite(String name, int img) {
+        this.sites.add(new SiteControl(name, img));
     }
 
-    public List getItems() {
-        return items;
+    public List getSites() {
+        return sites;
+    }
+
+    public void setControl(String name, String voice_control, int img, int state, int info) {
+        this.controls.add(new Control(name, voice_control, img, state, info));
+    }
+
+    public List getControls() {
+        return controls;
     }
 }

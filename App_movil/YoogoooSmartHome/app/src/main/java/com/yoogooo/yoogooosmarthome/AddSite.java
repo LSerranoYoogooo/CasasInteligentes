@@ -19,8 +19,10 @@ public class AddSite extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
-        MenuItem item = menu.findItem(R.id.add_site);
-        item.setVisible(false);
+        MenuItem site = menu.findItem(R.id.add_site);
+        site.setVisible(false);
+        MenuItem control = menu.findItem(R.id.add_control);
+        control.setVisible(false);
         return true;
     }
 
@@ -38,11 +40,25 @@ public class AddSite extends AppCompatActivity {
             public void onClick(View view) {
                 String site_name = name.getText().toString();
                 Globals global = Globals.getInstance();
-                global.setItems(site_name, R.drawable.homecontrol, true);
+                global.setSite(site_name, R.drawable.homecontrol);
                 Intent intent = new Intent(AddSite.this, Main.class);
                 startActivity(intent);
                 finish();
             }
         });
+    }
+    //acciones de botones en action bar
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                Intent intent2 = new Intent(this, Login.class);
+                startActivity(intent2);
+                finish();
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 }
