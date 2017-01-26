@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="100"
+        android:title="@string/logout" />
+    <item android:title="@string/txt_add_site"
+        android:id="@+id/action_add_site" />
+    <item
+        android:id="@+id/add_control"
+        android:icon="@android:drawable/ic_menu_manage"
+        app:showAsAction="always"
+        android:title="" />
+    <item
+        android:id="@+id/add_enclouser"
+        android:icon="@android:drawable/ic_input_add"
+        android:checkable="false"
+        app:showAsAction="always"
+        android:title="" />
+</menu>

@@ -17,4 +17,16 @@
     <string name="addControl">Agregar Control</string>
     <string name="voice_ctrl_on">Comando de voz encendido</string>
     <string name="voice_ctrl_off">Comando de voz apagado</string>
+    <string name="ip_address">Dirección ip</string>
+    <string name="ip_port">Puerto</string>
+    <string name="title_activity_main">Main</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="logout">Cerrar Sesion</string>
+    <string name="txt_add_site">Agregar locacion</string>
+    <string name="addEnclouser">Agregar Sala</string>
+    <string name="name_enclouser">Nombre de la Sala</string>
 </resources>

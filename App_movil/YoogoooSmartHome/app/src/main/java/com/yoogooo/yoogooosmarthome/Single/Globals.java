@@ -1,17 +1,18 @@
 package com.yoogooo.yoogooosmarthome.Single;
 
-import com.yoogooo.yoogooosmarthome.Model.Control;
-import com.yoogooo.yoogooosmarthome.Model.SiteControl;
-import java.util.ArrayList;
-import java.util.List;
+import com.yoogooo.yoogooosmarthome.Model.Enclouser;
 
-import static android.support.design.R.id.image;
+import java.util.ArrayList;
 
 public class Globals {
     private static Globals instance;
     // Global variable
-    List sites = new ArrayList();
-    List controls = new ArrayList();
+    private String usr_id;
+    private String usr_name;
+    private String usr_email;
+    private String usr_service;
+    private String id_st;
+    private ArrayList<Enclouser> listEnclouser;
     // Restrict the constructor from being instantiated
     private Globals(){}
 
@@ -22,19 +23,43 @@ public class Globals {
         return instance;
     }
 
-    public void setSite(String name, int img) {
-        this.sites.add(new SiteControl(name, img));
+    public String getUsr_id() {
+        return usr_id;
     }
 
-    public List getSites() {
-        return sites;
+    public String getUsr_name() {
+        return usr_name;
     }
 
-    public void setControl(String name, String voice_control, int img, int state, int info) {
-        this.controls.add(new Control(name, voice_control, img, state, info));
+    public String getUsr_email() {
+        return usr_email;
     }
 
-    public List getControls() {
-        return controls;
+    public String getUsr_service() {
+        return usr_service;
+    }
+
+    public void setUsr(String usr_id, String usr_name, String usr_email, String usr_service, String site) {
+        this.usr_id = usr_id;
+        this.usr_name = usr_name;
+        this.usr_email = usr_email;
+        this.usr_service = usr_service;
+        this.id_st = site;
+    }
+
+    public String getId_st() {
+        return id_st;
+    }
+
+    public void setId_st(String id_st) {
+        this.id_st = id_st;
+    }
+
+    public ArrayList<Enclouser> getListEnclouser() {
+        return listEnclouser;
+    }
+
+    public void setListEnclouser(ArrayList<Enclouser> listEnclouser) {
+        this.listEnclouser = listEnclouser;
     }
 }
