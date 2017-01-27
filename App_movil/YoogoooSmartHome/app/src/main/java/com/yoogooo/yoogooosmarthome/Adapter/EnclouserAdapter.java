@@ -1,6 +1,9 @@
 package com.yoogooo.yoogooosmarthome.Adapter;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +11,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.yoogooo.yoogooosmarthome.Model.Control;
 import com.yoogooo.yoogooosmarthome.Model.Enclouser;
 import com.yoogooo.yoogooosmarthome.R;
 import com.yoogooo.yoogooosmarthome.Single.Globals;
 import com.yoogooo.yoogooosmarthome.UI.Main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EnclouserAdapter extends RecyclerView.Adapter<EnclouserAdapter.EnclouserViewHolder> {
@@ -21,7 +26,7 @@ public class EnclouserAdapter extends RecyclerView.Adapter<EnclouserAdapter.Encl
     public static class EnclouserViewHolder extends RecyclerView.ViewHolder {
         // Campos respectivos para cada site
         public ImageView image;
-        public TextView st_id;
+        public TextView enc_id;
         public TextView title;
         private Globals globals = Globals.getInstance();
 
@@ -29,12 +34,30 @@ public class EnclouserAdapter extends RecyclerView.Adapter<EnclouserAdapter.Encl
             super(v);
             image = (ImageView) v.findViewById(R.id.image);
             title = (TextView) v.findViewById(R.id.site_name);
-            st_id = (TextView) v.findViewById(R.id.id_site);
+            enc_id = (TextView) v.findViewById(R.id.id_enc);
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    globals.setId_st(st_id.getText().toString());
-                    v.getContext().startActivity(new Intent(v.getContext(),Main.class));
+                    globals.setId_enc(enc_id.getText().toString());
+                    ArrayList<Control> controlsTmp = globals.getListControl();
+                    ArrayList<Control> listControls = new ArrayList<>();
+                    for (int i = 0; i < controlsTmp.size(); i++) {
+                        Control control = (Control) controlsTmp.get(i);
+                        if(control.getEnc_id().equals(globals.getId_enc())){
+                            listControls.add(control);
+                        }
+                    }
+                    // Obtener el Recycler
+                    Context ctx = v.getContext();
+                    View rootView = ((Activity)ctx).getWindow().getDecorView().findViewById(android.R.id.content);
+                    RecyclerView recycler = (RecyclerView) rootView.findViewById(R.id.principal_recycler);
+                    recycler.setHasFixedSize(true);
+                    // Usar un administrador para LinearLayout
+                    RecyclerView.LayoutManager lManager = new GridLayoutManager(v.getContext(), 2);
+                    recycler.setLayoutManager(lManager);
+                    // Crear un nuevo adaptador
+                    RecyclerView.Adapter adapter = new ControlsAdapter(listControls);
+                    recycler.setAdapter(adapter);
                 }
             });
         }
@@ -59,8 +82,8 @@ public class EnclouserAdapter extends RecyclerView.Adapter<EnclouserAdapter.Encl
 
     @Override
     public void onBindViewHolder(EnclouserViewHolder viewHolder, int i) {
-        viewHolder.image.setImageResource(items.get(i).getImage());
+        //viewHolder.image.setImageResource(items.get(i).getImage());
         viewHolder.title.setText(items.get(i).getTitle());
-        viewHolder.st_id.setText(items.get(i).getId_site());
+        viewHolder.enc_id.setText(items.get(i).getId());
     }
 }

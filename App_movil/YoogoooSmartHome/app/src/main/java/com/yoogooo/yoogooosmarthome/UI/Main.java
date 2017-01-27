@@ -13,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.yoogooo.yoogooosmarthome.Adapter.EnclouserAdapter;
 import com.yoogooo.yoogooosmarthome.Model.Enclouser;
+import com.yoogooo.yoogooosmarthome.Model.Site;
 import com.yoogooo.yoogooosmarthome.R;
 import com.yoogooo.yoogooosmarthome.Single.Globals;
 import com.yoogooo.yoogooosmarthome.Single.VolleyS;
@@ -76,9 +79,14 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        //carga de datos al menu
-        RequestSites(globals.getUsr_id(), navigationView);
-        RequestEnclouser(globals.getId_st(), navigationView );
+        //carga de sitios al menu segun el estado actual al hacer login
+        loadSites();
+        //carga del recinto predeterminado segun info del login
+        loadEnclouser(globals.getId_st());
+        //RequestSites(globals.getUsr_id(), navigationView);
+        //(globals.getId_st(), navigationView );
+
+
     }
 
     @Override
@@ -124,17 +132,32 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     //menu lateral izquierdo
     public boolean onNavigationItemSelected(MenuItem item) {
         globals.setId_st(Integer.toString(item.getItemId()));
+        loadEnclouser(globals.getId_st());
 
-        RequestEnclouser(Integer.toString(item.getItemId()), navigationView );
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         //cargar recintos
         return true;
     }
 
+    private void loadSites(){
+        List sites = globals.getListSite();
+        Menu menu = navigationView.getMenu();
+        for (int i = 0; i < sites.size(); i++) {
+            Site site = (Site) sites.get(i);
+            menu.add(R.id.drawer_menu, Integer.parseInt(site.getId()), Menu.NONE, site.getName());
+        }
+    }
     //carga de enclouser al recycler
-    private void loadEnclouser(List enclouser){
-        List enclousers = enclouser;
+    private void loadEnclouser(String enclouserid){
+        List enclousersTmp = globals.getListEnclouser();
+        ArrayList<Enclouser> listEnclouser = new ArrayList<>();
+        for (int i = 0; i < enclousersTmp.size(); i++) {
+            Enclouser enclouser = (Enclouser) enclousersTmp.get(i);
+            if(enclouser.getId_site().equals(enclouserid)){
+                listEnclouser.add(enclouser);
+            }
+        }
         // Obtener el Recycler
         recycler = (RecyclerView) findViewById(R.id.principal_recycler);
         recycler.setHasFixedSize(true);
@@ -142,84 +165,8 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         lManager = new GridLayoutManager(this, 2);
         recycler.setLayoutManager(lManager);
         // Crear un nuevo adaptador
-        adapter = new EnclouserAdapter(enclousers);
+        adapter = new EnclouserAdapter(listEnclouser);
         recycler.setAdapter(adapter);
     }
 
-    //Consulta al servidor obtener los sitios y carga de sitios a la UI
-    private void  RequestSites (final String user_id, final NavigationView navigationView) {
-        final String url = "http://www.demomp2015.yoogooo.com/Smart_Home/WB/get_site_user.php";
-        StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>(){
-            @Override
-            public void onResponse(String response) {
-                try {
-                    Menu menu = navigationView.getMenu();
-                    JSONArray jsonA = new JSONArray(response);
-                    ArrayList<Enclouser> listSite = new ArrayList<>();
-                    for (int i = 0; i < jsonA.length(); i++) {
-                        JSONObject row = jsonA.getJSONObject(i);
-                        menu.add(R.id.drawer_menu, Integer.parseInt(row.getString("id")), Menu.NONE, row.getString("name"));
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Error.Response", error.toString());
-            }
-        }
-        ) {
-            @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String> params = new HashMap<>();
-                params.put("user", user_id);
-                return params;
-            }
-        };
-        fRequestQueue.add(postRequest);
-    }
-
-    //Consulta al servidor obtener las salas
-    private void  RequestEnclouser (final String site_id, final NavigationView navigationView) {
-        final String url = "http://www.demomp2015.yoogooo.com/Smart_Home/WB/get_enclouser_site.php";
-        StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>(){
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONArray jsonA = new JSONArray(response);
-                    ArrayList<Enclouser> listEnclouser = new ArrayList<>();
-                    for (int i = 0; i < jsonA.length(); i++) {
-                        JSONObject row = jsonA.getJSONObject(i);
-                        Enclouser enclouser = new Enclouser();
-                        enclouser.setTitle(row.getString("name"));
-                        enclouser.setId_site(row.getString("id"));
-                        enclouser.setImage(R.drawable.homecontrol_ejm);
-                        listEnclouser.add(enclouser);
-                    }
-                    globals.setListEnclouser(listEnclouser);
-                    loadEnclouser(globals.getListEnclouser());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Error.Response", error.toString());
-            }
-        }
-        ) {
-            @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String> params = new HashMap<>();
-                params.put("site_id", site_id);
-                return params;
-            }
-        };
-        fRequestQueue.add(postRequest);
-    }
 }

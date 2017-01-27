@@ -1,6 +1,8 @@
 package com.yoogooo.yoogooosmarthome.Single;
 
+import com.yoogooo.yoogooosmarthome.Model.Control;
 import com.yoogooo.yoogooosmarthome.Model.Enclouser;
+import com.yoogooo.yoogooosmarthome.Model.Site;
 
 import java.util.ArrayList;
 
@@ -12,7 +14,10 @@ public class Globals {
     private String usr_email;
     private String usr_service;
     private String id_st;
+    private String id_enc;
     private ArrayList<Enclouser> listEnclouser;
+    private ArrayList<Site> listSite;
+    private ArrayList<Control> listControl;
     // Restrict the constructor from being instantiated
     private Globals(){}
 
@@ -61,5 +66,29 @@ public class Globals {
 
     public void setListEnclouser(ArrayList<Enclouser> listEnclouser) {
         this.listEnclouser = listEnclouser;
+    }
+
+    public ArrayList<Site> getListSite() {
+        return listSite;
+    }
+
+    public void setListSite(ArrayList<Site> listSite) {
+        this.listSite = listSite;
+    }
+
+    public ArrayList<Control> getListControl() {
+        return listControl;
+    }
+
+    public void setListControl(ArrayList<Control> listControl) {
+        this.listControl = listControl;
+    }
+
+    public String getId_enc() {
+        return id_enc;
+    }
+
+    public void setId_enc(String id_enc) {
+        this.id_enc = id_enc;
     }
 }

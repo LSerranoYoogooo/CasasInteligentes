@@ -2,25 +2,27 @@ package com.yoogooo.yoogooosmarthome.Model;
 
 
 public class Enclouser {
-    String title;
+    String id;
     String id_site;
-    int image;
+    String title;
+    String image;
 
-    public Enclouser(String title, int image, String id_st) {
+    public Enclouser(String id, String id_site, String title, String image) {
+        this.id = id;
+        this.id_site = id_site;
         this.title = title;
         this.image = image;
-        this.id_site = id_st;
     }
 
     public Enclouser() {
     }
 
-    public String getTitle() {
-        return title;
+    public String getId() {
+        return id;
     }
 
-    public int getImage() {
-        return image;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getId_site() {
@@ -31,11 +33,19 @@ public class Enclouser {
         this.id_site = id_site;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public void setImage(int image) {
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
         this.image = image;
     }
 }

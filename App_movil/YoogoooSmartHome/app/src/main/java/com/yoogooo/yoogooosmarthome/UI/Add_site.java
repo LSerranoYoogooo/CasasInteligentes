@@ -49,6 +49,7 @@ public class Add_site extends AppCompatActivity {
                 Request(global.getUsr_id(), name.getText().toString(), "0.000.000", "0.000.000", "homecontrol_ejm", ip.getText().toString(), port.getText().toString());
             }
         });
+
     }
     //envio de datos al servidor
     private void  Request (final String user_id, final String site_name, final String latitud, final String longitud, final String img_name, final String ip, final String port) {

@@ -15,78 +15,77 @@
         <View
             android:layout_width="180dp"
             android:background="#ffd5d5d5"
-            android:id="@+id/linea"
+            android:id="@+id/lineaH"
             android:layout_height="2dp"
-            android:layout_below="@+id/name_control"
-            android:layout_alignLeft="@+id/name_control"
-            android:layout_alignStart="@+id/name_control"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="41dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
 
         </View>
 
-        <View
-            android:layout_width="2dp"
-            android:background="#ffd5d5d5"
-            android:id="@+id/lineaV"
-            android:layout_height="130dp"
-            android:layout_alignTop="@+id/linea"
-            android:layout_alignRight="@+id/name_control"
-            android:layout_alignEnd="@+id/name_control"
-            android:layout_marginRight="52dp"
-            android:layout_marginEnd="52dp">
-
-        </View>
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/img_control"
-            android:layout_below="@+id/linea"
-            android:layout_alignLeft="@+id/linea"
-            android:layout_alignStart="@+id/linea"
-            android:layout_toLeftOf="@+id/lineaV"
-            android:layout_toStartOf="@+id/lineaV"
-            android:layout_alignBottom="@+id/img_detail" />
+        <EditText
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:inputType="text"
+            android:ems="10"
+            android:id="@+id/ctrl_id"
+            android:layout_centerInParent="false"
+            android:layout_above="@+id/lineaH"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true" />
 
         <TextView
             android:text="TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/img_control"
-            android:layout_alignStart="@+id/img_control"
-            android:id="@+id/comand_voice"
-            android:layout_alignRight="@+id/lineaV"
-            android:layout_alignEnd="@+id/lineaV" />
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="40dp"
-            android:id="@+id/img_state"
-            android:layout_above="@+id/img_detail"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/ctrl_name"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginBottom="18dp"
-            android:layout_toRightOf="@+id/img_control"
-            android:layout_toEndOf="@+id/img_control" />
-
-        <TextView
-            android:layout_width="175dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:text="Large Text"
-            android:id="@+id/name_control"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse" />
 
         <ImageView
-            android:layout_width="25dp"
+            android:layout_width="40dp"
             android:layout_height="40dp"
-            android:id="@+id/img_detail"
-            android:layout_toRightOf="@+id/comand_voice"
-            android:layout_above="@+id/comand_voice"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            card_view:srcCompat="@drawable/info__ejm"
+            android:id="@+id/ctrl_info"
+            android:layout_marginBottom="11dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@+id/ctrl_state"
+            android:layout_alignStart="@+id/ctrl_state" />
+
+        <ImageView
+            android:layout_width="110dp"
+            android:layout_height="120dp"
+            card_view:srcCompat="@drawable/porton_ejm"
+            android:id="@+id/ctrl_img"
+            android:layout_alignTop="@+id/lineaH"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="5dp" />
+
+        <View
+            android:layout_width="2dp"
+            android:background="#ffd5d5d5"
+            android:id="@+id/lineaV"
+            android:layout_height="118dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/ctrl_img"
+            android:layout_toEndOf="@+id/ctrl_img">
+
+        </View>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            card_view:srcCompat="@android:color/holo_red_dark"
+            android:id="@+id/ctrl_state"
+            android:layout_alignTop="@+id/ctrl_img"
+            android:layout_toLeftOf="@+id/ctrl_id"
+            android:layout_toStartOf="@+id/ctrl_id" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

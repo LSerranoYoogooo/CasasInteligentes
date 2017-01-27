@@ -47,7 +47,7 @@
             android:layout_height="10sp"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/id_site"
+            android:id="@+id/id_enc"
             android:layout_below="@+id/site_name"
             android:layout_toRightOf="@+id/image"
             android:layout_toEndOf="@+id/image" />
