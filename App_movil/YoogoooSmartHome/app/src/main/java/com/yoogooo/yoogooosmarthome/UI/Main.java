@@ -103,7 +103,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
     @Override
-    //menu lateral derecho
+    //menu lateral inzquierdo
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         //elementos del menu lateral derecho
@@ -114,6 +114,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         } else if (id == R.id.action_add_site){
             Intent intent = new Intent(Main.this, Add_site.class);
             startActivity(intent);
+            finish();
         } else if (id == R.id.add_control){
             Intent intent = new Intent(Main.this, Add_control.class);
             startActivity(intent);
@@ -126,7 +127,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    //menu lateral izquierdo
+    //menu lateral derecho
     public boolean onNavigationItemSelected(MenuItem item) {
         globals.setId_st(Integer.toString(item.getItemId()));
         loadEnclouser(globals.getId_st());

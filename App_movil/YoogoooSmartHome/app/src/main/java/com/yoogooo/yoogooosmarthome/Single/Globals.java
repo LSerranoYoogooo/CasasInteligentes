@@ -1,5 +1,6 @@
 package com.yoogooo.yoogooosmarthome.Single;
 
+import android.support.design.widget.NavigationView;
 import android.view.Menu;
 
 import com.yoogooo.yoogooosmarthome.Model.Control;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 public class Globals {
     private static Globals instance;
     // Global variable
+    private NavigationView nav;
     private Menu menu;
     private String usr_id;
     private String usr_name;
