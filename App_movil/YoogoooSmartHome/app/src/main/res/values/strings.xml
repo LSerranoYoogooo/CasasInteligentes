@@ -29,4 +29,5 @@
     <string name="txt_add_site">Agregar locacion</string>
     <string name="addEnclouser">Agregar Sala</string>
     <string name="name_enclouser">Nombre de la Sala</string>
+    <string name="txt_channel">Canal de control</string>
 </resources>

@@ -25,13 +25,13 @@
         <activity android:name=".AddSite" />
         <activity android:name=".Controls" />
         <activity android:name=".ControlList" />
-        <activity android:name=".AddControl" />
+        <activity android:name=".UI.Add_control" />
         <activity
             android:name=".UI.Main"
             android:label="@string/title_activity_main"
             android:theme="@style/NoActionBar" />
         <activity android:name=".UI.Add_site" />
-        <activity android:name=".UI.Add_enclouser"></activity>
+        <activity android:name=".UI.Add_enclouser" />
     </application>
 
 </manifest>

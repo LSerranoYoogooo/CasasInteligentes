@@ -1,5 +1,7 @@
 package com.yoogooo.yoogooosmarthome.Single;
 
+import android.view.Menu;
+
 import com.yoogooo.yoogooosmarthome.Model.Control;
 import com.yoogooo.yoogooosmarthome.Model.Enclouser;
 import com.yoogooo.yoogooosmarthome.Model.Site;
@@ -9,6 +11,7 @@ import java.util.ArrayList;
 public class Globals {
     private static Globals instance;
     // Global variable
+    private Menu menu;
     private String usr_id;
     private String usr_name;
     private String usr_email;
@@ -90,5 +93,13 @@ public class Globals {
 
     public void setId_enc(String id_enc) {
         this.id_enc = id_enc;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
     }
 }

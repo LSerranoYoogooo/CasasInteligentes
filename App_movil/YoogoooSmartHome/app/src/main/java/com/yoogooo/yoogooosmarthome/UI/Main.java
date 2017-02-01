@@ -1,10 +1,10 @@
 package com.yoogooo.yoogooosmarthome.UI;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,30 +12,21 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.yoogooo.yoogooosmarthome.Adapter.EnclouserAdapter;
 import com.yoogooo.yoogooosmarthome.Model.Enclouser;
 import com.yoogooo.yoogooosmarthome.Model.Site;
 import com.yoogooo.yoogooosmarthome.R;
 import com.yoogooo.yoogooosmarthome.Single.Globals;
 import com.yoogooo.yoogooosmarthome.Single.VolleyS;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import static com.yoogooo.yoogooosmarthome.R.menu.main;
 
 public class Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     //variable de acceso al menu
@@ -79,14 +70,13 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //menu lateral derecho
         //carga de sitios al menu segun el estado actual al hacer login
         loadSites();
         //carga del recinto predeterminado segun info del login
         loadEnclouser(globals.getId_st());
         //RequestSites(globals.getUsr_id(), navigationView);
         //(globals.getId_st(), navigationView );
-
-
     }
 
     @Override
@@ -102,7 +92,13 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(main, menu);
+        MenuItem addCtrl = menu.findItem(R.id.add_control);
+        MenuItem addEnc = menu.findItem(R.id.add_enclouser);
+        addCtrl.setVisible(false);
+        addEnc.setVisible(true);
+        Globals globals = Globals.getInstance();
+        globals.setMenu(menu);
         return true;
     }
 
@@ -119,7 +115,8 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
             Intent intent = new Intent(Main.this, Add_site.class);
             startActivity(intent);
         } else if (id == R.id.add_control){
-
+            Intent intent = new Intent(Main.this, Add_control.class);
+            startActivity(intent);
         } else if (id == R.id.add_enclouser){
             Intent intent = new Intent(Main.this, Add_enclouser.class);
             startActivity(intent);
@@ -133,6 +130,12 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     public boolean onNavigationItemSelected(MenuItem item) {
         globals.setId_st(Integer.toString(item.getItemId()));
         loadEnclouser(globals.getId_st());
+
+        Menu menu = globals.getMenu();
+        MenuItem addCtrl = menu.findItem(R.id.add_control);
+        MenuItem addEnc = menu.findItem(R.id.add_enclouser);
+        addCtrl.setVisible(false);
+        addEnc.setVisible(true);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

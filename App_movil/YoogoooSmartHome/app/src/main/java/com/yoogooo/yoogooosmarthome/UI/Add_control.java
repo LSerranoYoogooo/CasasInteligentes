@@ -6,9 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,35 +26,49 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Add_enclouser extends AppCompatActivity {
-    TextView name;
+public class Add_control extends AppCompatActivity {
+    private String[] spinner;
+    private Spinner tipo;
+    private TextView ctrl_name, voice_on, voice_off, channel;
     private RequestQueue fRequestQueue;
     private View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_enclouser);
-        view = findViewById(R.id.add_enclouser);
-
+        setContentView(R.layout.add_control);
+        view = findViewById(R.id.add_control);
         VolleyS volley = VolleyS.getInstance(getApplicationContext());
         fRequestQueue = volley.getRequestQueue();
+        //carga de opciones al spinner
+        this.spinner = new String[] {
+                "Luces", "Toma Corriente", "Tuberias", "Portones", "Puertas", "Piscina", "Aire Condicionado"
+        };
+        tipo = (Spinner) findViewById(R.id.spn_ctrl_type);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, spinner);
+        tipo.setAdapter(adapter);
 
-        name = (TextView) findViewById(R.id.enclouser_name);
+        ctrl_name = (TextView) findViewById(R.id.txt_ctrl_name);
+        voice_on = (TextView) findViewById(R.id.txt_ctrl_on);
+        voice_off = (TextView) findViewById(R.id.txt_ctrl_off);
+        channel = (TextView) findViewById(R.id.txt_ctrl_channel);
+
+
         //boton agregar sitio
-        Button btnAddSite = (Button) findViewById(R.id.btnAddEnclouser);
+        Button btnAddSite = (Button) findViewById(R.id.btn_add_control);
         btnAddSite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Globals global = Globals.getInstance();
                 //Strings provicionales
-                Request(global.getId_st(), name.getText().toString(), "homecontrol_ejm", view);
+                Request(global.getId_enc(), ctrl_name.getText().toString(), voice_on.getText().toString(), voice_off.getText().toString(), channel.getText().toString(), "1", view);
             }
         });
     }
 
-    private void  Request (final String site_id, final String enclouser_name, final String img, final View v) {
-        final String url = "http://www.demomp2015.yoogooo.com/Smart_Home/WB/set_enclouser.php";
+    private void  Request (final String enc_id, final String name, final String voice_on, final String voice_off, final String channel, final String img, final View v) {
+        final String url = "http://www.demomp2015.yoogooo.com/Smart_Home/WB/set_control.php";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()
                 {
@@ -63,9 +78,9 @@ public class Add_enclouser extends AppCompatActivity {
                             JSONObject json = new JSONObject(response);
                             String status = json.getString("status");
                             if (status.equals("true")){
-                                Snackbar.make(v, "Sala agregada con exito", Snackbar.LENGTH_LONG)
+                                Snackbar.make(v, "Control agregado con exito", Snackbar.LENGTH_LONG)
                                         .setAction("Action", null).show();
-                                Intent intent = new Intent(Add_enclouser.this, Main.class);
+                                Intent intent = new Intent(Add_control.this, Main.class);
                                 startActivity(intent);
                                 finish();
                             }
@@ -87,13 +102,15 @@ public class Add_enclouser extends AppCompatActivity {
             protected Map<String, String> getParams()
             {
                 Map<String, String> params = new HashMap<>();
-                params.put("site_id", site_id);
-                params.put("name", enclouser_name);
+                params.put("enc_id", enc_id);
+                params.put("name", name);
+                params.put("voice_on", voice_on);
+                params.put("voice_off", voice_off);
+                params.put("channel", channel);
                 params.put("img", img);
                 return params;
             }
         };
         fRequestQueue.add(postRequest);
     }
-
 }

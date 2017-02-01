@@ -1,14 +1,12 @@
 package com.yoogooo.yoogooosmarthome.UI;
 
-import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -17,16 +15,16 @@ import com.android.volley.toolbox.StringRequest;
 import com.yoogooo.yoogooosmarthome.R;
 import com.yoogooo.yoogooosmarthome.Single.Globals;
 import com.yoogooo.yoogooosmarthome.Single.VolleyS;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class Add_site extends AppCompatActivity {
     TextView name, ip, port;
     private RequestQueue fRequestQueue;
+    private View view;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +33,8 @@ public class Add_site extends AppCompatActivity {
         //inicializadores elementos
         VolleyS volley = VolleyS.getInstance(getApplicationContext());
         fRequestQueue = volley.getRequestQueue();
+        //obtencion del view actual
+        view = findViewById(R.id.content_main);
 
         name = (TextView) findViewById(R.id.site_name);
         ip = (TextView) findViewById(R.id.ip_add);
@@ -46,30 +46,33 @@ public class Add_site extends AppCompatActivity {
             public void onClick(View view) {
                 Globals global = Globals.getInstance();
                 //Strings provicionales
-                Request(global.getUsr_id(), name.getText().toString(), "0.000.000", "0.000.000", "homecontrol_ejm", ip.getText().toString(), port.getText().toString());
+                Request(global.getUsr_id(), name.getText().toString(), "0.000.000", "0.000.000", "homecontrol_ejm", ip.getText().toString(), port.getText().toString(), view);
             }
         });
 
     }
     //envio de datos al servidor
-    private void  Request (final String user_id, final String site_name, final String latitud, final String longitud, final String img_name, final String ip, final String port) {
+    private void  Request (final String user_id, final String site_name, final String latitud, final String longitud, final String img_name, final String ip, final String port, final View v) {
         final String url = "http://www.demomp2015.yoogooo.com/Smart_Home/WB/set_site.php";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Snackbar.make(v, "Sitio agregado", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();/*
                 try {
                     JSONObject json = new JSONObject(response);
                     String status = json.getString("status");
                     if (status.equals("true")){
-                        Toast toast = Toast.makeText(getApplicationContext(), "Sitio agregado", Toast.LENGTH_SHORT);
-                        toast.show();
-                        Intent intent = new Intent(Add_site.this, Main.class);
-                        startActivity(intent);
+                        //Snackbar.make(v, "Sitio agregado", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        Snackbar snackbar = Snackbar.make(v, "Sitio agregado", Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                        //Intent intent = new Intent(Add_site.this, Main.class);
+                        //startActivity(intent);
                         finish();
                     }
                 } catch (JSONException e) {
                             e.printStackTrace();
-                        }
+                        }*/
                     }
                 },
                 new Response.ErrorListener()
@@ -77,6 +80,8 @@ public class Add_site extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("Error.Response", error.toString());
+                        Snackbar.make(v, "Error al agregar sitio a su cuenta", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
                     }
                 }
         ) {
@@ -96,5 +101,4 @@ public class Add_site extends AppCompatActivity {
         };
         fRequestQueue.add(postRequest);
     }
-
 }

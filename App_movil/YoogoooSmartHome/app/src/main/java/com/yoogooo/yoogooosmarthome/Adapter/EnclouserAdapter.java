@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,6 +22,8 @@ import com.yoogooo.yoogooosmarthome.UI.Main;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.yoogooo.yoogooosmarthome.R.menu.main;
 
 public class EnclouserAdapter extends RecyclerView.Adapter<EnclouserAdapter.EnclouserViewHolder> {
     private List<Enclouser> items;
@@ -58,6 +63,11 @@ public class EnclouserAdapter extends RecyclerView.Adapter<EnclouserAdapter.Encl
                     // Crear un nuevo adaptador
                     RecyclerView.Adapter adapter = new ControlsAdapter(listControls);
                     recycler.setAdapter(adapter);
+                    Menu menu = globals.getMenu();
+                    MenuItem addCtrl = menu.findItem(R.id.add_control);
+                    MenuItem addEnc = menu.findItem(R.id.add_enclouser);
+                    addCtrl.setVisible(true);
+                    addEnc.setVisible(false);
                 }
             });
         }

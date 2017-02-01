@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_control"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.yoogooo.yoogooosmarthome.UI.Add_control"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <TextView
+        android:text="@string/addControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/control_name"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/txt_ctrl_name" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.19"
+            android:hint="@string/voice_ctrl_on">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_ctrl_on" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:layout_width="63dp"
+            android:layout_height="match_parent"
+            android:background="@android:drawable/ic_btn_speak_now"
+            android:id="@+id/btn_voice_on" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/voice_ctrl_off"
+            android:layout_weight="1.08">
+
+            <EditText
+                android:layout_width="285dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_ctrl_off" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:layout_width="63dp"
+            android:layout_height="match_parent"
+            android:id="@+id/btn_voice_off"
+            android:background="@android:drawable/ic_btn_speak_now" />
+    </LinearLayout>
+
+    <Spinner
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/spn_ctrl_type"
+        android:layout_weight="0.13"
+        android:layout_marginBottom="20dp" >
+    </Spinner>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/txt_channel"
+            android:id="@+id/txt_ctrl_channel"
+            android:inputType="number" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:text="@string/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_add_control"
+        android:layout_gravity="center" />
+</LinearLayout>

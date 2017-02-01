@@ -17,5 +17,6 @@
         android:icon="@android:drawable/ic_input_add"
         android:checkable="false"
         app:showAsAction="always"
-        android:title="" />
+        android:title=""
+        android:visible="false" />
 </menu>

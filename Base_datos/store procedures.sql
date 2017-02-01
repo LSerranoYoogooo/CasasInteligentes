@@ -28,3 +28,11 @@ CREATE PROCEDURE set_Enclouser( IN site_id VARCHAR( 160 ), IN name VARCHAR( 160 
 BEGIN
 INSERT INTO enclouser(st_id, enc_name, enc_img) VALUES (site_id, name, img);
 END
+
+
+//Control
+DELIMITER $$ 
+CREATE PROCEDURE set_Control( IN enc_id VARCHAR( 160 ), IN name VARCHAR( 160 ),  IN voice_on VARCHAR( 160 ),  IN voice_off VARCHAR( 160 ),  IN channel VARCHAR( 160 ),  IN img VARCHAR( 160 ) )
+BEGIN
+INSERT INTO control(enc_id, ctrl_name, ctrl_voice_on, ctrl_voice_off, ctrl_channel, ctrl_img)  VALUES (enc_id, name, voice_on, voice_off, channel, img);
+END
