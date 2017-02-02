@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.yoogooo.yoogooosmarthome.Model.Control;
 import com.yoogooo.yoogooosmarthome.R;
+import com.yoogooo.yoogooosmarthome.Single.Globals;
 import com.yoogooo.yoogooosmarthome.Single.VolleyS;
 
 import java.util.HashMap;
@@ -45,18 +46,20 @@ public class ControlsAdapter extends RecyclerView.Adapter<ControlsAdapter.Contro
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(v, "envio datos -->" + id.getText(), Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-
                     VolleyS volley = VolleyS.getInstance(v.getContext());
                     fRequestQueue = volley.getRequestQueue();
+                    //obtencion del id control
+                    Globals globals = Globals.getInstance();
+                    String idCtrl = id.getText().toString();
+                    String channel = globals.getChannelCtrl(idCtrl);
+                    String comando = "http://"+globals.getIp()+":"+globals.getPort()+"/Salida"+channel;
                     //envio de peticion al server
-                    RequestControl("Salida8");
+                    RequestControl(comando);
                 }
 
                 //Consulta al servidor obtener las salas
-                private void  RequestControl (final String channel) {
-                    final String url = "http://186.4.46.122:81/" + channel;
+                private void  RequestControl (final String comando) {
+                    final String url = comando;
                     StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>(){
                         @Override
                         public void onResponse(String response) {
@@ -110,6 +113,7 @@ public class ControlsAdapter extends RecyclerView.Adapter<ControlsAdapter.Contro
         } else {
             viewHolder.state.setImageResource(R.color.state_off);
         }
+
 
     }
 }

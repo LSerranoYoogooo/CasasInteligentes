@@ -8,7 +8,7 @@ if (!empty($_POST)) {
   try{
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password, array(\PDO::MYSQL_ATTR_INIT_COMMAND =>  'SET NAMES utf8'));
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = $conn->prepare("SELECT s.st_id, st_name, s.st_latitud, s.st_longitud, s.st_img, ip.ipa_ip, ip.ipa_port FROM site s, ip_address ip WHERE s.usr_id = :user and ip.usr_id = :user group by s.st_id");
+    $sql = $conn->prepare("SELECT s.st_id, s.st_name, s.st_latitud, s.st_longitud, s.st_img, ip.ipa_ip, ip.ipa_port FROM site s, ip_address ip WHERE s.usr_id = :user and ip.usr_id = :user group by s.st_id");
     $sql->execute(array('user' => $_POST['user']));
     $resultado = $sql->fetchAll();
 

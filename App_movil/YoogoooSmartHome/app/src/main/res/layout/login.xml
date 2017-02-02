@@ -24,44 +24,60 @@
         android:layout_marginBottom="16dp"
         app:backgroundTint="@android:color/holo_green_dark" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        tools:ignore="ContentDescription"
+        app:srcCompat="@drawable/logo_static"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/linearLayout" />
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/linearLayout"
         android:layout_above="@+id/addUsr"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/linearLayout">
+        android:layout_alignParentStart="true">
 
         <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            app:errorEnabled="false"
-            app:passwordToggleEnabled="false">
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="false"
+            android:id="@+id/til_email"
+            app:errorEnabled="true"
+            android:layout_gravity="center">
 
             <EditText
-                android:layout_width="328dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/user_name"
                 android:layout_gravity="center"
                 android:id="@+id/txt_user"
                 android:autoText="true"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                style="@style/Widget.AppCompat.AutoCompleteTextView" />
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:layout_width="318dp"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             app:counterMaxLength="16"
             app:counterEnabled="true"
             android:clipToPadding="false"
             app:passwordToggleEnabled="true"
-            android:layout_marginTop="10sp">
+            app:errorEnabled="true"
+            android:id="@+id/til_password"
+            android:layout_marginTop="10dp">
 
             <EditText
-                android:layout_width="322dp"
+                android:layout_width="340dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/user_pass"
                 android:id="@+id/txt_pass"
@@ -78,13 +94,4 @@
             android:layout_marginTop="20sp" />
 
     </LinearLayout>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="false"
-        android:padding="20dp"
-        tools:ignore="ContentDescription"
-        app:srcCompat="@drawable/logo_static"
-        android:layout_above="@+id/linearLayout" />
 </RelativeLayout>

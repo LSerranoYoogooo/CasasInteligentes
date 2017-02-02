@@ -2,6 +2,7 @@ package com.yoogooo.yoogooosmarthome.UI;
 
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,17 +46,29 @@ public class Add_site extends AppCompatActivity {
         name = (TextView) findViewById(R.id.site_name);
         ip = (TextView) findViewById(R.id.ip_add);
         port = (TextView) findViewById(R.id.ip_port);
+
         //boton agregar sitio
         Button btnAddSite = (Button) findViewById(R.id.btnAddSite);
         btnAddSite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Strings provicionales
-                site = new Site(global.getUsr_id(), name.getText().toString(), "0.000.000", "0.000.000", "homecontrol_ejm", ip.getText().toString(), port.getText().toString());
-                Request(site , view);
+                String nombre = name.getText().toString();
+                String dir_ip = ip.getText().toString();
+                String dir_port = port.getText().toString();
+                TextInputLayout tilN = (TextInputLayout) findViewById(R.id.til_site_name);
+                TextInputLayout tilI = (TextInputLayout) findViewById(R.id.til_ip_site);
+                TextInputLayout tilP = (TextInputLayout) findViewById(R.id.til_port_site);
+                //comprobacion de todos los datos requeridos
+                if(!validateName(nombre)){
+                    tilN.setError("Nombre de sitio requerido");
+                } else {
+                    tilN.setErrorEnabled(false);
+                    //Strings provicionales
+                    site = new Site(global.getUsr_id(), nombre, "0.000.000", "0.000.000", "homecontrol_ejm", dir_ip, dir_port);
+                    Request(site , view);
+                }
             }
         });
-
     }
     //codigo para el boton de atras
     @Override
@@ -156,5 +169,17 @@ public class Add_site extends AppCompatActivity {
             }
         };
         fRequestQueue.add(postRequest);
+    }
+
+    public boolean validateName(String name) {
+        return name.length() >= 1;
+    }
+
+    public boolean validateIp(String ip) {
+        return ip.length() >= 7; //CAMBIAR A MINIMO 8
+    }
+
+    public boolean validatePort(String password) {
+        return password.length() > 2; //CAMBIAR A MINIMO 8
     }
 }

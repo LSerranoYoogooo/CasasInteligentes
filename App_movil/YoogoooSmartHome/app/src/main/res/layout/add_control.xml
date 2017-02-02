@@ -23,7 +23,8 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/til_ctrl_name">
 
         <EditText
             android:layout_width="match_parent"
@@ -44,7 +45,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2.19"
-            android:hint="@string/voice_ctrl_on">
+            android:hint="@string/voice_ctrl_on"
+            android:id="@+id/til_ctrl_v_on">
 
             <EditText
                 android:layout_width="match_parent"
@@ -70,7 +72,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/voice_ctrl_off"
-            android:layout_weight="1.08">
+            android:layout_weight="1.08"
+            android:id="@+id/til_ctrl_v_off">
 
             <EditText
                 android:layout_width="285dp"
@@ -95,7 +98,8 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/til_ctrl_channel">
 
         <EditText
             android:layout_width="match_parent"

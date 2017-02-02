@@ -26,7 +26,7 @@ if (!empty($_POST)) {
         $response["usr_service_type"] = $row["usr_service_type"];
         $response["site_id"] = $row["default_site"];
 
-        $sql2 = $conn->prepare("SELECT s.st_id, st_name, s.st_latitud, s.st_longitud, s.st_img, ip.ipa_ip, ip.ipa_port FROM site s, ip_address ip WHERE s.usr_id = :user and ip.usr_id = :user group by s.st_id");
+        $sql2 = $conn->prepare("SELECT s.st_id, s.st_name, s.st_latitud, s.st_longitud, s.st_img, ip.ipa_ip, ip.ipa_port FROM site s, ip_address ip WHERE s.usr_id = :user and ip.usr_id = :user group by s.st_id");
         $sql2->execute(array('user' => $row["usr_id"]));
         $resultado2 = $sql2->fetchAll();
 

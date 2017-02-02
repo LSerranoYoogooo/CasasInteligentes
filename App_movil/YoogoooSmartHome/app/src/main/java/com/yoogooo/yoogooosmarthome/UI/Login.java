@@ -1,13 +1,16 @@
 package com.yoogooo.yoogooosmarthome.UI;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,12 +32,18 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Login extends AppCompatActivity {
     private TextView usr;
     private TextView pass;
     private RequestQueue fRequestQueue;
     private View view;
+    //validaciones
+    private static final String EMAIL_PATTERN = "^[a-zA-Z0-9#_~!$&'()*+,;=:.\"(),:;<>@\\[\\]\\\\]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$";
+    private Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+    private Matcher matcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +72,21 @@ public class Login extends AppCompatActivity {
                 fRequestQueue = volley.getRequestQueue();
                 usr = (TextView) findViewById(R.id.txt_user);
                 pass = (TextView) findViewById(R.id.txt_pass);
-                if(InternetStatus.isOnline(getApplicationContext())){
 
-                    Request(usr.getText().toString(), pass.getText().toString(), view);
+                String email = usr.getText().toString();
+                String password = pass.getText().toString();
+                if(InternetStatus.isOnline(getApplicationContext())){
+                    TextInputLayout tilE = (TextInputLayout) findViewById(R.id.til_email);
+                    TextInputLayout tilP = (TextInputLayout) findViewById(R.id.til_password);
+                    if (!validateEmail(email)) {
+                        tilE.setError("Formato de email no valido");
+                    } else if (!validatePassword(password)) {
+                        tilP.setError("Minimo 8 caracteres");
+                    } else {
+                        tilE.setErrorEnabled(false);
+                        tilP.setErrorEnabled(false);
+                        Request(email, password, view);
+                    }
                 } else {
                     Toast toast = Toast.makeText(getApplicationContext(), "Sin coneccion a internet", Toast.LENGTH_SHORT);
                     toast.show();
@@ -144,7 +165,6 @@ public class Login extends AppCompatActivity {
                                     listControl.add(control);
                                 }
                                 global.setListControl(listControl);
-
                                 pDialog.dismiss();
 
                                 Intent intent = new Intent(Login.this, Main.class);
@@ -180,5 +200,15 @@ public class Login extends AppCompatActivity {
             }
         };
         fRequestQueue.add(postRequest);
+    }
+
+    //funciones de validaciones
+    public boolean validateEmail(String email) {
+        matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    public boolean validatePassword(String password) {
+        return password.length() > 2; //CAMBIAR A MINIMO 8
     }
 }

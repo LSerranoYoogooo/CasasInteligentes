@@ -1,8 +1,10 @@
 package com.yoogooo.yoogooosmarthome.UI;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.design.widget.NavigationView;
@@ -15,6 +17,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.yoogooo.yoogooosmarthome.Adapter.EnclouserAdapter;
@@ -41,6 +46,8 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     Globals globals = Globals.getInstance();
     // variable para las consultas al server
     private RequestQueue fRequestQueue;
+    //doble click para cerrar
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,13 +77,11 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        //menu lateral derecho
+        //menu lateral izquierdo
         //carga de sitios al menu segun el estado actual al hacer login
         loadSites();
         //carga del recinto predeterminado segun info del login
         loadEnclouser(globals.getId_st());
-        //RequestSites(globals.getUsr_id(), navigationView);
-        //(globals.getId_st(), navigationView );
     }
 
     @Override
@@ -87,6 +92,20 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         } else {
             super.onBackPressed();
         }
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "doble click atras para salir", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 1000);
     }
 
     @Override
@@ -103,7 +122,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
     @Override
-    //menu lateral inzquierdo
+    //menu lateral derecho
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         //elementos del menu lateral derecho
@@ -118,16 +137,18 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         } else if (id == R.id.add_control){
             Intent intent = new Intent(Main.this, Add_control.class);
             startActivity(intent);
+            finish();
         } else if (id == R.id.add_enclouser){
             Intent intent = new Intent(Main.this, Add_enclouser.class);
             startActivity(intent);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    //menu lateral derecho
+    //menu lateral izquierdo
     public boolean onNavigationItemSelected(MenuItem item) {
         globals.setId_st(Integer.toString(item.getItemId()));
         loadEnclouser(globals.getId_st());
@@ -153,12 +174,20 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         }
     }
     //carga de enclouser al recycler
-    private void loadEnclouser(String enclouserid){
+    private void loadEnclouser(String siteId){
+        ArrayList<Site> listSite = globals.getListSite();
+        for (int i = 0; i < listSite.size(); i++) {
+            Site site = listSite.get(i);
+            if(site.getId().equals(siteId)){
+                globals.setIp(site.getIp());
+                globals.setPort(site.getPort());
+            }
+        }
         List enclousersTmp = globals.getListEnclouser();
         ArrayList<Enclouser> listEnclouser = new ArrayList<>();
         for (int i = 0; i < enclousersTmp.size(); i++) {
             Enclouser enclouser = (Enclouser) enclousersTmp.get(i);
-            if(enclouser.getId_site().equals(enclouserid)){
+            if(enclouser.getId_site().equals(siteId)){
                 listEnclouser.add(enclouser);
             }
         }

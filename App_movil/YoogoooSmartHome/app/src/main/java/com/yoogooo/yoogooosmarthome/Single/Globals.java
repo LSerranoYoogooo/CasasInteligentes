@@ -3,9 +3,13 @@ package com.yoogooo.yoogooosmarthome.Single;
 import android.support.design.widget.NavigationView;
 import android.view.Menu;
 
+import com.yoogooo.yoogooosmarthome.Adapter.ComandVoice;
 import com.yoogooo.yoogooosmarthome.Model.Control;
 import com.yoogooo.yoogooosmarthome.Model.Enclouser;
 import com.yoogooo.yoogooosmarthome.Model.Site;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -18,6 +22,8 @@ public class Globals {
     private String usr_name;
     private String usr_email;
     private String usr_service;
+    private String ip;
+    private String port;
     private String id_st;
     private String id_enc;
     private ArrayList<Enclouser> listEnclouser;
@@ -31,6 +37,22 @@ public class Globals {
             instance=new Globals();
         }
         return instance;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
     }
 
     public String getUsr_id() {
@@ -103,5 +125,17 @@ public class Globals {
 
     public void setMenu(Menu menu) {
         this.menu = menu;
+    }
+
+    public String getChannelCtrl(String ctrlId){
+        ArrayList<Control> listControl = this.listControl;
+        String channel = null;
+        for (int i = 0; i < listControl.size(); i++) {
+            Control ctrl = listControl.get(i);
+            if(ctrl.getId().equals(ctrlId)){
+                channel = ctrl.getChannel();
+            }
+        }
+        return channel;
     }
 }
