@@ -1,5 +1,8 @@
 package com.yoogooo.yoogooosmarthome.Adapter;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,6 +17,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.yoogooo.yoogooosmarthome.Helper.ImgDefault;
 import com.yoogooo.yoogooosmarthome.Model.Control;
 import com.yoogooo.yoogooosmarthome.R;
 import com.yoogooo.yoogooosmarthome.Single.Globals;
@@ -105,13 +109,14 @@ public class ControlsAdapter extends RecyclerView.Adapter<ControlsAdapter.Contro
 
     @Override
     public void onBindViewHolder(ControlsAdapter.ControlViewHolder viewHolder, int i) {
+        ImgDefault imgID = new ImgDefault();
         viewHolder.id.setText(items.get(i).getId());
         viewHolder.title.setText(items.get(i).getName());
-        //viewHolder.image.setImageResource(R.drawable.aire_ejm);
+        viewHolder.image.setImageResource(imgID.getImageId(items.get(i).getImg()));
         if(items.get(i).getState().equals("1")){
-            viewHolder.state.setImageResource(R.color.state_on);
+            viewHolder.state.setImageResource(R.drawable.on);
         } else {
-            viewHolder.state.setImageResource(R.color.state_off);
+            viewHolder.state.setImageResource(R.drawable.off);
         }
 
 

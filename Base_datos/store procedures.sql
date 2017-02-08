@@ -18,6 +18,17 @@ SET ID = LAST_INSERT_ID();
 INSERT INTO ip_address(st_id, usr_id, ipa_ip, ipa_port) VALUES (ID, usr_id, ip_address, ip_port);
 END
 
+DELIMITER $$ 
+CREATE PROCEDURE set_Default_Site(IN usr_id VARCHAR( 160 ), IN name VARCHAR( 160 ), IN latitud VARCHAR( 160 ),  IN longitud VARCHAR( 160 ), IN img VARCHAR( 10 ), IN ip_address VARCHAR( 160 ), IN ip_port VARCHAR( 160 ))
+BEGIN
+DECLARE ID INT;
+INSERT INTO site(usr_id, st_name, st_latitud, st_longitud, st_img) VALUES (usr_id, name, latitud, longitud, img);
+SET ID = LAST_INSERT_ID();
+INSERT INTO ip_address(st_id, usr_id, ipa_ip, ipa_port) VALUES (ID, usr_id, ip_address, ip_port);
+UPDATE user_app SET default_site= id WHERE user_app.usr_id = usr_id;
+END
+
+
 
 //IP_address
 

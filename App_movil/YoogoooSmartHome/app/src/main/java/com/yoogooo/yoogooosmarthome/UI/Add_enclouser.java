@@ -57,7 +57,7 @@ public class Add_enclouser extends AppCompatActivity {
                     tilNS.setErrorEnabled(false);
                     Globals global = Globals.getInstance();
                     //Strings provicionales
-                    Request(global.getId_st(), name.getText().toString(), "homecontrol_ejm", view);
+                    Request(global.getId_st(), name.getText().toString(), "sala", view);
                 }
             }
         });

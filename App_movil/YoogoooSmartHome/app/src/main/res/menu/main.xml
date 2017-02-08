@@ -9,14 +9,12 @@
         android:id="@+id/action_add_site" />
     <item
         android:id="@+id/add_control"
-        android:icon="@android:drawable/ic_menu_manage"
+        android:icon="@drawable/icon_addctrl"
         app:showAsAction="always"
         android:title="" />
     <item
         android:id="@+id/add_enclouser"
-        android:icon="@android:drawable/ic_input_add"
+        android:icon="@android:drawable/ic_dialog_dialer"
         android:checkable="false"
-        app:showAsAction="always"
-        android:title=""
-        android:visible="false" />
+        app:showAsAction="always" />
 </menu>

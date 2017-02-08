@@ -1,10 +1,11 @@
 package com.yoogooo.yoogooosmarthome.UI;
 
-import android.app.Activity;
-import android.content.Context;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.speech.RecognizerIntent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.design.widget.NavigationView;
@@ -14,15 +15,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.yoogooo.yoogooosmarthome.Adapter.EnclouserAdapter;
+import com.yoogooo.yoogooosmarthome.Helper.VoiceControl;
 import com.yoogooo.yoogooosmarthome.Model.Enclouser;
 import com.yoogooo.yoogooosmarthome.Model.Site;
 import com.yoogooo.yoogooosmarthome.R;
@@ -48,6 +47,8 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     private RequestQueue fRequestQueue;
     //doble click para cerrar
     boolean doubleBackToExitPressedOnce = false;
+    //
+    private VoiceControl voiceC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,16 +59,28 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         //inicializador de voley para consultar al server
         VolleyS volley = VolleyS.getInstance(getApplicationContext());
         fRequestQueue = volley.getRequestQueue();
+        voiceC = new VoiceControl(getApplicationContext());
 
         //action floating button
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intentActionRecognizeSpeech = new Intent(
+                        RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                // Configura el Lenguaje (Español-México)
+                intentActionRecognizeSpeech.putExtra(
+                        RecognizerIntent.EXTRA_LANGUAGE_MODEL, "es-MX");
+                try {
+                    startActivityForResult(intentActionRecognizeSpeech,
+                            RECOGNIZE_SPEECH_ACTIVITY);
+                } catch (ActivityNotFoundException a) {
+                    Toast.makeText(getApplicationContext(),
+                            "Tú dispositivo no soporta el reconocimiento por voz",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
-        });*/
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -77,6 +90,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
         //menu lateral izquierdo
         //carga de sitios al menu segun el estado actual al hacer login
         loadSites();
@@ -86,7 +100,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        /*DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -95,7 +109,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
             return;
-        }
+        }*/
 
         this.doubleBackToExitPressedOnce = true;
         Toast.makeText(this, "doble click atras para salir", Toast.LENGTH_SHORT).show();
@@ -200,6 +214,24 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         // Crear un nuevo adaptador
         adapter = new EnclouserAdapter(listEnclouser);
         recycler.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case RECOGNIZE_SPEECH_ACTIVITY:
+                if (resultCode == RESULT_OK && null != data) {
+                    ArrayList<String> speech = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    String strSpeech2Text = speech.get(0);
+                    strSpeech2Text = strSpeech2Text.toUpperCase();
+                    voiceC.sendComand(strSpeech2Text);
+                }
+                break;
+            default:
+                break;
+        }
     }
 
 }

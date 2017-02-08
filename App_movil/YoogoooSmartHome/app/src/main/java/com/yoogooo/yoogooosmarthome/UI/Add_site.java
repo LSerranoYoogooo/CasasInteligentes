@@ -62,10 +62,17 @@ public class Add_site extends AppCompatActivity {
                 if(!validateName(nombre)){
                     tilN.setError("Nombre de sitio requerido");
                 } else {
-                    tilN.setErrorEnabled(false);
-                    //Strings provicionales
-                    site = new Site(global.getUsr_id(), nombre, "0.000.000", "0.000.000", "homecontrol_ejm", dir_ip, dir_port);
-                    Request(site , view);
+                    if(global.getListSite().isEmpty()){
+                        tilN.setErrorEnabled(false);
+                        //Strings provicionales
+                        site = new Site(global.getUsr_id(), nombre, "0.000.000", "0.000.000", "homecontrol_ejm", dir_ip, dir_port);
+                        Request(site, "set_default_site.php" , view);
+                    } else {
+                        tilN.setErrorEnabled(false);
+                        //Strings provicionales
+                        site = new Site(global.getUsr_id(), nombre, "0.000.000", "0.000.000", "homecontrol_ejm", dir_ip, dir_port);
+                        Request(site ,"set_site.php", view);
+                    }
                 }
             }
         });
@@ -78,8 +85,8 @@ public class Add_site extends AppCompatActivity {
         finish();
     }
     //envio de datos al servidor
-    private void  Request (final Site site, final View v) {
-        final String url = "http://www.demomp2015.yoogooo.com/Smart_Home/WB/set_site.php";
+    private void  Request (final Site site, final String Url, final View v) {
+        final String url = "http://www.demomp2015.yoogooo.com/Smart_Home/WB/"+ Url;
         StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

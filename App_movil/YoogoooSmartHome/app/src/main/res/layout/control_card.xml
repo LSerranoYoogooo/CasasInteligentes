@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     card_view:cardElevation="0dp"
-    card_view:cardBackgroundColor="@color/cardview_dark_background"
+    card_view:cardBackgroundColor="@color/colorPrimary"
     android:layout_margin="1sp">
 
     <RelativeLayout
@@ -50,7 +50,7 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            card_view:srcCompat="@drawable/info__ejm"
+            card_view:srcCompat="@android:drawable/ic_menu_add"
             android:id="@+id/ctrl_info"
             android:layout_marginBottom="11dp"
             android:layout_alignParentBottom="true"
@@ -60,7 +60,7 @@
         <ImageView
             android:layout_width="110dp"
             android:layout_height="120dp"
-            card_view:srcCompat="@drawable/porton_ejm"
+            card_view:srcCompat="@drawable/luz"
             android:id="@+id/ctrl_img"
             android:layout_alignTop="@+id/lineaH"
             android:layout_alignParentLeft="true"
@@ -81,7 +81,7 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            card_view:srcCompat="@android:color/holo_red_dark"
+            card_view:srcCompat="@drawable/off"
             android:id="@+id/ctrl_state"
             android:layout_alignTop="@+id/ctrl_img"
             android:layout_toLeftOf="@+id/ctrl_id"

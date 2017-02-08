@@ -3,6 +3,9 @@ package com.yoogooo.yoogooosmarthome.Adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.yoogooo.yoogooosmarthome.Helper.ImgDefault;
 import com.yoogooo.yoogooosmarthome.Model.Control;
 import com.yoogooo.yoogooosmarthome.Model.Enclouser;
 import com.yoogooo.yoogooosmarthome.R;
@@ -92,7 +96,8 @@ public class EnclouserAdapter extends RecyclerView.Adapter<EnclouserAdapter.Encl
 
     @Override
     public void onBindViewHolder(EnclouserViewHolder viewHolder, int i) {
-        //viewHolder.image.setImageResource(items.get(i).getImage());
+        ImgDefault imgID = new ImgDefault();
+        viewHolder.image.setImageResource(imgID.getImageId(items.get(i).getImage()));
         viewHolder.title.setText(items.get(i).getTitle());
         viewHolder.enc_id.setText(items.get(i).getId());
     }

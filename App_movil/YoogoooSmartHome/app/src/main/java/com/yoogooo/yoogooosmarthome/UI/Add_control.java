@@ -16,7 +16,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.yoogooo.yoogooosmarthome.Adapter.ComandVoice;
 import com.yoogooo.yoogooosmarthome.Model.Control;
 import com.yoogooo.yoogooosmarthome.R;
 import com.yoogooo.yoogooosmarthome.Single.Globals;
@@ -59,6 +58,7 @@ public class Add_control extends AppCompatActivity {
         final TextInputLayout tilVN = (TextInputLayout) findViewById(R.id.til_ctrl_v_on);
         final TextInputLayout tilVF = (TextInputLayout) findViewById(R.id.til_ctrl_v_off);
         final TextInputLayout tilCH = (TextInputLayout) findViewById(R.id.til_ctrl_channel);
+        final TextInputLayout tilSP = (TextInputLayout) findViewById(R.id.til_spnType);
 
         //boton agregar sitio
         Button btnAddSite = (Button) findViewById(R.id.btn_add_control);
@@ -75,32 +75,43 @@ public class Add_control extends AppCompatActivity {
                     tilCN.setErrorEnabled(false);
                     tilVN.setErrorEnabled(false);
                 } else if(!validateString(channel.getText().toString())){
-                    tilCH.setError("Canal de control requerido");
+                    tilSP.setError("debe elegir un tipo de control");
                     tilCN.setErrorEnabled(false);
                     tilVN.setErrorEnabled(false);
                     tilVF.setErrorEnabled(false);
-                } else{
-                    boolean VN = voiceExistente(voice_on.getText().toString());
-                    boolean VF = voiceExistente(voice_off.getText().toString());
-                    boolean CH = usedChannel(channel.getText().toString());
-                    if(!VN && !VF && !CH){
+
+                } else {
+                    if (!validateString(channel.getText().toString())) {
+                        tilCH.setError("Canal de control requerido");
                         tilCN.setErrorEnabled(false);
                         tilVN.setErrorEnabled(false);
                         tilVF.setErrorEnabled(false);
-                        tilCH.setErrorEnabled(false);
-                        Globals global = Globals.getInstance();
-                        //Strings provicionales
-                        Request(global.getId_enc(), ctrl_name.getText().toString(), voice_on.getText().toString(), voice_off.getText().toString(), channel.getText().toString(), "1", view);
+                        tilSP.setErrorEnabled(false);
                     } else {
-                        if(CH){
-                            Snackbar.make(view, "Canal en uso", Snackbar.LENGTH_LONG)
-                                    .setAction("Action", null).show();
+                        boolean VN = voiceExistente(voice_on.getText().toString());
+                        boolean VF = voiceExistente(voice_off.getText().toString());
+                        boolean CH = usedChannel(channel.getText().toString());
+                        if (!VN && !VF && !CH) {
+                            tilCN.setErrorEnabled(false);
+                            tilVN.setErrorEnabled(false);
+                            tilVF.setErrorEnabled(false);
+                            tilCH.setErrorEnabled(false);
+                            tilSP.setErrorEnabled(false);
+                            String type = tipo.getSelectedItem().toString();
+                            Globals global = Globals.getInstance();
+                            //Strings provicionales
+                            Request(global.getId_enc(), ctrl_name.getText().toString(), voice_on.getText().toString().toUpperCase(), voice_off.getText().toString().toUpperCase(), channel.getText().toString(), type, view);
                         } else {
-                            Snackbar.make(view, "Comando de vos ya en uso", Snackbar.LENGTH_LONG)
-                                    .setAction("Action", null).show();
+                            if (CH) {
+                                Snackbar.make(view, "Canal en uso", Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
+                            } else {
+                                Snackbar.make(view, "Comando de vos ya en uso", Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
+                            }
                         }
-                    }
 
+                    }
                 }
             }
         });
