@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -20,11 +21,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".UI.Login" />
-        <activity android:name=".Register" />
-        <activity android:name=".Maint" />
-        <activity android:name=".AddSite" />
-        <activity android:name=".Controls" />
-        <activity android:name=".ControlList" />
         <activity android:name=".UI.Add_control" />
         <activity
             android:name=".UI.Main"

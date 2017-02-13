@@ -1,12 +1,14 @@
 package com.yoogooo.yoogooosmarthome.Single;
 
-import android.support.design.widget.NavigationView;
+import android.content.Context;
+import android.util.Log;
 import android.view.Menu;
 import com.yoogooo.yoogooosmarthome.Model.Control;
 import com.yoogooo.yoogooosmarthome.Model.Enclouser;
 import com.yoogooo.yoogooosmarthome.Model.Site;
 
-
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class Globals {
@@ -24,6 +26,7 @@ public class Globals {
     private ArrayList<Enclouser> listEnclouser;
     private ArrayList<Site> listSite;
     private ArrayList<Control> listControl;
+    private Control control;
     // Restrict the constructor from being instantiated
     private Globals(){}
 
@@ -122,15 +125,38 @@ public class Globals {
         this.menu = menu;
     }
 
-    public String getChannelCtrl(String ctrlId){
+    public Control getCtrl(String ctrlId){
         ArrayList<Control> listControl = this.listControl;
-        String channel = null;
+        Control ctrl = null;
         for (int i = 0; i < listControl.size(); i++) {
-            Control ctrl = listControl.get(i);
-            if(ctrl.getId().equals(ctrlId)){
-                channel = ctrl.getChannel();
+            Control ctrlTmp = listControl.get(i);
+            if(ctrlTmp.getId().equals(ctrlId)){
+                ctrl = ctrlTmp;
             }
         }
-        return channel;
+        return ctrl;
+    }
+
+    public Control getControl() {
+        return control;
+    }
+
+    public void setControl(Control control) {
+        this.control = control;
+    }
+
+    public void logOut(){
+        this.menu = null;
+        this.usr_id = null;
+        this.usr_name  = null;
+        this.usr_email = null;
+        this.usr_service  = null;
+        this.ip  = null;
+        this.port  = null;
+        this.id_st  = null;
+        this.id_enc  = null;
+        this.listEnclouser  = null;
+        this.listSite  = null;
+        this.listControl  = null;
     }
 }

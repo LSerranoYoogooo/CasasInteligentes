@@ -55,10 +55,12 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:layout_width="63dp"
+            android:layout_width="45dp"
             android:layout_height="match_parent"
-            android:background="@android:drawable/ic_btn_speak_now"
-            android:id="@+id/btn_voice_on" />
+            android:background="@drawable/icon_mic"
+            android:id="@+id/btn_voice_on"
+            android:backgroundTint="@color/cardview_dark_background"
+            android:layout_margin="5dp" />
 
     </LinearLayout>
 
@@ -82,10 +84,12 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:layout_width="63dp"
+            android:layout_width="45dp"
             android:layout_height="match_parent"
             android:id="@+id/btn_voice_off"
-            android:background="@android:drawable/ic_btn_speak_now" />
+            android:background="@drawable/icon_mic"
+            android:backgroundTint="@color/cardview_dark_background"
+            android:layout_margin="5dp" />
     </LinearLayout>
 
     <android.support.design.widget.TextInputLayout

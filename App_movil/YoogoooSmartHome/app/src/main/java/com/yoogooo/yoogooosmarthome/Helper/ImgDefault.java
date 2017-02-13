@@ -7,7 +7,7 @@ public class ImgDefault {
     public ImgDefault() {
     }
 
-    public int getImageId(String name){
+    public static int getImageId(String name){
         int imgId;
         switch (name) {
             case "Luces": //error

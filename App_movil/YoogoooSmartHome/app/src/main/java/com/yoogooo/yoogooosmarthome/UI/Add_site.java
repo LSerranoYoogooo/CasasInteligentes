@@ -1,6 +1,5 @@
 package com.yoogooo.yoogooosmarthome.UI;
 
-import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -80,8 +79,6 @@ public class Add_site extends AppCompatActivity {
     //codigo para el boton de atras
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(Add_site.this, Main.class);
-        startActivity(intent);
         finish();
     }
     //envio de datos al servidor
@@ -151,8 +148,6 @@ public class Add_site extends AppCompatActivity {
                         listSite.add(site);
                     }
                     global.setListSite(listSite);
-                    Intent intent = new Intent(Add_site.this, Main.class);
-                    startActivity(intent);
                     finish();
                 } catch (JSONException e) {
                     e.printStackTrace();

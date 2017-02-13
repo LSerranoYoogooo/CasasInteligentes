@@ -1,7 +1,6 @@
 package com.yoogooo.yoogooosmarthome.Helper;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -35,12 +34,12 @@ public class VoiceControl {
             Control ctrl = controls.get(i);
             if(ctrl.getVoice_on().equals(comando)){
                 String channel = ctrl.getChannel();
-                String comand = "http://"+globals.getIp()+":"+globals.getPort()+"/Salida"+channel+"on";
+                String comand = "http://"+globals.getIp()+":"+globals.getPort()+"/Salida"+channel+"On";
                 RequestControl(comand);
                 res = true;
             } else if(ctrl.getVoice_off().equals(comando)) {
                 String channel = ctrl.getChannel();
-                String comand = "http://"+globals.getIp()+":"+globals.getPort()+"/Salida"+channel+"off";
+                String comand = "http://"+globals.getIp()+":"+globals.getPort()+"/Salida"+channel+"Off";
                 RequestControl(comand);
                 res = true;
             }

@@ -1,6 +1,7 @@
 package com.yoogooo.yoogooosmarthome.UI;
 
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,11 +15,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
 import com.android.volley.RequestQueue;
 import com.yoogooo.yoogooosmarthome.Adapter.EnclouserAdapter;
 import com.yoogooo.yoogooosmarthome.Helper.VoiceControl;
@@ -27,6 +28,10 @@ import com.yoogooo.yoogooosmarthome.Model.Site;
 import com.yoogooo.yoogooosmarthome.R;
 import com.yoogooo.yoogooosmarthome.Single.Globals;
 import com.yoogooo.yoogooosmarthome.Single.VolleyS;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,7 +105,26 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
     @Override
     public void onBackPressed() {
-        /*DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
+    /*
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -109,18 +133,8 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
             return;
-        }*/
-
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "doble click atras para salir", Toast.LENGTH_SHORT).show();
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce=false;
-            }
-        }, 1000);
-    }
+        }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -141,21 +155,27 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         int id = item.getItemId();
         //elementos del menu lateral derecho
         if (id == R.id.action_logout) {
+            //cierre session definitivo
+            globals.logOut();
+            try {
+                OutputStreamWriter fout = new OutputStreamWriter(openFileOutput("dataYSH", Context.MODE_PRIVATE));
+                fout.write("0");
+                fout.close();
+            } catch (Exception ex) {
+                Log.e("Ficheros", "Error write file");
+            }
             Intent intent = new Intent(Main.this, Login.class);
             startActivity(intent);
             finish();
         } else if (id == R.id.action_add_site){
             Intent intent = new Intent(Main.this, Add_site.class);
             startActivity(intent);
-            finish();
         } else if (id == R.id.add_control){
             Intent intent = new Intent(Main.this, Add_control.class);
             startActivity(intent);
-            finish();
         } else if (id == R.id.add_enclouser){
             Intent intent = new Intent(Main.this, Add_enclouser.class);
             startActivity(intent);
-            finish();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -205,6 +225,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                 listEnclouser.add(enclouser);
             }
         }
+
         // Obtener el Recycler
         recycler = (RecyclerView) findViewById(R.id.principal_recycler);
         recycler.setHasFixedSize(true);
@@ -225,7 +246,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                     ArrayList<String> speech = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     String strSpeech2Text = speech.get(0);
-                    strSpeech2Text = strSpeech2Text.toUpperCase();
+                    strSpeech2Text = strSpeech2Text.toLowerCase();
                     voiceC.sendComand(strSpeech2Text);
                 }
                 break;

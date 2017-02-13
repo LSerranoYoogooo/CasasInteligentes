@@ -1,6 +1,8 @@
 package com.yoogooo.yoogooosmarthome.UI;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.speech.RecognizerIntent;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -33,6 +37,8 @@ public class Add_control extends AppCompatActivity {
     private TextView ctrl_name, voice_on, voice_off, channel;
     private RequestQueue fRequestQueue;
     private View view;
+    private static final int RECOGNIZE_SPEECH_ACTIVITY = 1;
+    private int mic = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +66,48 @@ public class Add_control extends AppCompatActivity {
         final TextInputLayout tilCH = (TextInputLayout) findViewById(R.id.til_ctrl_channel);
         final TextInputLayout tilSP = (TextInputLayout) findViewById(R.id.til_spnType);
 
+        //boton microfono comando voz on
+        Button btnMicOn = (Button) findViewById(R.id.btn_voice_on);
+        btnMicOn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mic = 1;
+                Intent intentActionRecognizeSpeech = new Intent(
+                        RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                // Configura el Lenguaje (Español-México)
+                intentActionRecognizeSpeech.putExtra(
+                        RecognizerIntent.EXTRA_LANGUAGE_MODEL, "es-MX");
+                try {
+                    startActivityForResult(intentActionRecognizeSpeech,
+                            RECOGNIZE_SPEECH_ACTIVITY);
+                } catch (ActivityNotFoundException a) {
+                    Toast.makeText(getApplicationContext(),
+                            "Tú dispositivo no soporta el reconocimiento por voz",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        //boton microfono comando voz off
+        Button btnMicOff = (Button) findViewById(R.id.btn_voice_off);
+        btnMicOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mic = 2;
+                Intent intentActionRecognizeSpeech = new Intent(
+                        RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                // Configura el Lenguaje (Español-México)
+                intentActionRecognizeSpeech.putExtra(
+                        RecognizerIntent.EXTRA_LANGUAGE_MODEL, "es-MX");
+                try {
+                    startActivityForResult(intentActionRecognizeSpeech,
+                            RECOGNIZE_SPEECH_ACTIVITY);
+                } catch (ActivityNotFoundException a) {
+                    Toast.makeText(getApplicationContext(),
+                            "Tú dispositivo no soporta el reconocimiento por voz",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         //boton agregar sitio
         Button btnAddSite = (Button) findViewById(R.id.btn_add_control);
         btnAddSite.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +148,7 @@ public class Add_control extends AppCompatActivity {
                             String type = tipo.getSelectedItem().toString();
                             Globals global = Globals.getInstance();
                             //Strings provicionales
-                            Request(global.getId_enc(), ctrl_name.getText().toString(), voice_on.getText().toString().toUpperCase(), voice_off.getText().toString().toUpperCase(), channel.getText().toString(), type, view);
+                            Request(global.getId_enc(), ctrl_name.getText().toString(), voice_on.getText().toString().toLowerCase(), voice_off.getText().toString().toLowerCase(), channel.getText().toString(), type, view);
                         } else {
                             if (CH) {
                                 Snackbar.make(view, "Canal en uso", Snackbar.LENGTH_LONG)
@@ -110,7 +158,6 @@ public class Add_control extends AppCompatActivity {
                                         .setAction("Action", null).show();
                             }
                         }
-
                     }
                 }
             }
@@ -119,8 +166,6 @@ public class Add_control extends AppCompatActivity {
     //codigo para el boton de atras
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(Add_control.this, Main.class);
-        startActivity(intent);
         finish();
     }
 
@@ -140,7 +185,6 @@ public class Add_control extends AppCompatActivity {
                                         .setAction("Action", null).show();
                                 RequestAux(globals.getUsr_id());
                             }
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -196,8 +240,6 @@ public class Add_control extends AppCompatActivity {
                                 listControl.add(control);
                             }
                             global.setListControl(listControl);
-                            Intent intent = new Intent(Add_control.this, Main.class);
-                            startActivity(intent);
                             finish();
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -259,4 +301,26 @@ public class Add_control extends AppCompatActivity {
         return res;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case RECOGNIZE_SPEECH_ACTIVITY:
+                if (resultCode == RESULT_OK && null != data) {
+                    ArrayList<String> speech = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    String strSpeech2Text = speech.get(0);
+                    strSpeech2Text = strSpeech2Text.toLowerCase();
+                    if (mic == 1){
+                        voice_on.setText(strSpeech2Text);
+                    } else if (mic == 2){
+                        voice_off.setText(strSpeech2Text);
+                    }
+                    mic = 0;
+                }
+                break;
+            default:
+                break;
+        }
+    }
 }

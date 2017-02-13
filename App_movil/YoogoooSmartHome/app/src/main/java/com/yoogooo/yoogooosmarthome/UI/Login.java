@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +28,8 @@ import com.yoogooo.yoogooosmarthome.Single.VolleyS;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -165,6 +166,21 @@ public class Login extends AppCompatActivity {
                                     listControl.add(control);
                                 }
                                 global.setListControl(listControl);
+                                //===============================================================
+                                try
+                                {
+                                    OutputStreamWriter fout =
+                                            new OutputStreamWriter(
+                                                    openFileOutput("dataYSH", Context.MODE_PRIVATE));
+
+                                    fout.write(global.getUsr_id());
+                                    fout.close();
+                                }
+                                catch (Exception ex)
+                                {
+                                    Log.e("Ficheros", "Error al escribir fichero a memoria interna");
+                                }
+                                //=================================================================
                                 pDialog.dismiss();
 
                                 Intent intent = new Intent(Login.this, Main.class);
