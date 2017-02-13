@@ -1,35 +1,23 @@
 package com.yoogooo.yoogooosmarthome.Single;
 
-import android.content.Context;
-import android.util.Log;
 import android.view.Menu;
 import com.yoogooo.yoogooosmarthome.Model.Control;
 import com.yoogooo.yoogooosmarthome.Model.Enclouser;
 import com.yoogooo.yoogooosmarthome.Model.Site;
-
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class Globals {
     private static Globals instance;
     // Global variable
     private Menu menu;
-    private String usr_id;
-    private String usr_name;
-    private String usr_email;
-    private String usr_service;
-    private String ip;
-    private String port;
-    private String id_st;
-    private String id_enc;
+    private String usr_id, usr_name, usr_email, usr_service, ip, port, id_st, id_enc;
     private ArrayList<Enclouser> listEnclouser;
     private ArrayList<Site> listSite;
     private ArrayList<Control> listControl;
     private Control control;
     // Restrict the constructor from being instantiated
     private Globals(){}
-
+    //intanciador de la clase bajo los estandares de una clase singleton
     public static synchronized Globals getInstance(){
         if(instance==null){
             instance=new Globals();

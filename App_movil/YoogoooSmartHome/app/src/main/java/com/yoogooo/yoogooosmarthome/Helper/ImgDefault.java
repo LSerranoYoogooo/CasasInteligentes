@@ -4,9 +4,6 @@ import com.yoogooo.yoogooosmarthome.R;
 
 public class ImgDefault {
 
-    public ImgDefault() {
-    }
-
     public static int getImageId(String name){
         int imgId;
         switch (name) {

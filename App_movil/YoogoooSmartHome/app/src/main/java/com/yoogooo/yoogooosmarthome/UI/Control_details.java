@@ -1,6 +1,5 @@
 package com.yoogooo.yoogooosmarthome.UI;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +16,6 @@ import com.yoogooo.yoogooosmarthome.Model.Control;
 import com.yoogooo.yoogooosmarthome.R;
 import com.yoogooo.yoogooosmarthome.Single.Globals;
 import com.yoogooo.yoogooosmarthome.Single.VolleyS;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -70,8 +68,6 @@ public class Control_details extends AppCompatActivity {
     //codigo para el boton de atras
     @Override
     public void onBackPressed() {
-        //Intent intent = new Intent(Control_details.this, Main.class);
-        //startActivity(intent);
         finish();
     }
 

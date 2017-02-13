@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.yoogooo.yoogooosmarthome.AddSite">
+    tools:context="com.yoogooo.yoogooosmarthome.UI.Add_enclouser">
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
@@ -35,8 +35,6 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:text="@string/addEnclouser"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="center" />
 
         <android.support.design.widget.TextInputLayout

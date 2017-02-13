@@ -26,8 +26,7 @@ public class EnclouserAdapter extends RecyclerView.Adapter<EnclouserAdapter.Encl
     public static class EnclouserViewHolder extends RecyclerView.ViewHolder {
         // Campos respectivos para cada site
         public ImageView image;
-        public TextView enc_id;
-        public TextView title;
+        public TextView enc_id, title;
         private Globals globals = Globals.getInstance();
 
         public EnclouserViewHolder(View v) {
@@ -77,7 +76,7 @@ public class EnclouserAdapter extends RecyclerView.Adapter<EnclouserAdapter.Encl
         return items.size();
     }
 
-    //carga de datos a cada card view y posterior mente al layout correspondiente
+    //carga de datos a cada card view y posteriormente al layout correspondiente
     @Override
     public EnclouserViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
@@ -87,8 +86,7 @@ public class EnclouserAdapter extends RecyclerView.Adapter<EnclouserAdapter.Encl
 
     @Override
     public void onBindViewHolder(EnclouserViewHolder viewHolder, int i) {
-        ImgDefault imgID = new ImgDefault();
-        viewHolder.image.setImageResource(imgID.getImageId(items.get(i).getImage()));
+        viewHolder.image.setImageResource(ImgDefault.getImageId(items.get(i).getImage()));
         viewHolder.title.setText(items.get(i).getTitle());
         viewHolder.enc_id.setText(items.get(i).getId());
         viewHolder.enc_id.setInputType(InputType.TYPE_NULL);

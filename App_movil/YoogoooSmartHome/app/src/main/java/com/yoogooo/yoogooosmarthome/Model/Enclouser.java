@@ -1,18 +1,7 @@
 package com.yoogooo.yoogooosmarthome.Model;
 
-
 public class Enclouser {
-    String id;
-    String id_site;
-    String title;
-    String image;
-
-    public Enclouser(String id, String id_site, String title, String image) {
-        this.id = id;
-        this.id_site = id_site;
-        this.title = title;
-        this.image = image;
-    }
+    String id, id_site, title, image;
 
     public Enclouser() {
     }

@@ -30,4 +30,7 @@
     <string name="addEnclouser">Agregar Sala</string>
     <string name="name_enclouser">Nombre de la Sala</string>
     <string name="txt_channel">Canal de control</string>
+    <string name="add_ctrl_on">Comando de voz encendido</string>
+    <string name="add_ctrl_off">comandoo de voz apagado</string>
+    <string name="add_ctrl_ch">Canal de control</string>
 </resources>

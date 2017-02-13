@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -127,7 +126,6 @@ public class Add_control extends AppCompatActivity {
                     tilCN.setErrorEnabled(false);
                     tilVN.setErrorEnabled(false);
                     tilVF.setErrorEnabled(false);
-
                 } else {
                     if (!validateString(channel.getText().toString())) {
                         tilCH.setError("Canal de control requerido");

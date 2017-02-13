@@ -30,7 +30,6 @@
         android:layout_alignParentStart="true">
 
         <TextView
-            android:text="name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txt_ctrl_d_name"
@@ -44,7 +43,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Comando de voz encendido"
+                android:hint="@string/add_ctrl_on"
                 android:layout_margin="5dp"
                 android:id="@+id/txt_ctrl_d_on" />
         </android.support.design.widget.TextInputLayout>
@@ -57,7 +56,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="comandoo de voz apagado"
+                android:hint="@string/add_ctrl_off"
                 android:id="@+id/txt_ctrl_d_off" />
         </android.support.design.widget.TextInputLayout>
 
@@ -68,7 +67,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Canal de control"
+                android:hint="@string/add_ctrl_ch"
                 android:layout_margin="5dp"
                 android:id="@+id/txt_ctrl_d_channel" />
         </android.support.design.widget.TextInputLayout>

@@ -1,14 +1,7 @@
 package com.yoogooo.yoogooosmarthome.Model;
 
 public class Control {
-    private String id;
-    private String enc_id;
-    private String name;
-    private String voice_on;
-    private String voice_off;
-    private String channel;
-    private String state;
-    private String img;
+    private String id, enc_id, name, voice_on, voice_off, channel, state, img;
 
     public Control() {
     }

@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Add_enclouser extends AppCompatActivity {
-    TextView name;
+    private TextView name;
     private RequestQueue fRequestQueue;
     private View view;
 
@@ -156,5 +156,4 @@ public class Add_enclouser extends AppCompatActivity {
     public boolean validateSiteName(String valor) {
         return valor.length() > 1;
     }
-
 }

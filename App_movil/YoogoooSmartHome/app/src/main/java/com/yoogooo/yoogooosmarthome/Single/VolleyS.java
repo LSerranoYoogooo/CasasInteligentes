@@ -1,12 +1,10 @@
 package com.yoogooo.yoogooosmarthome.Single;
 
 import android.content.Context;
-
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
 public class VolleyS {
-
     private static VolleyS mVolleyS = null;
     //Este objeto es la cola que usará la aplicación
     private RequestQueue mRequestQueue;
@@ -25,5 +23,4 @@ public class VolleyS {
     public RequestQueue getRequestQueue() {
         return mRequestQueue;
     }
-
 }

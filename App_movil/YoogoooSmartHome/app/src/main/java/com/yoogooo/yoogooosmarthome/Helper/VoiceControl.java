@@ -2,7 +2,6 @@ package com.yoogooo.yoogooosmarthome.Helper;
 
 import android.content.Context;
 import android.util.Log;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -11,7 +10,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.yoogooo.yoogooosmarthome.Model.Control;
 import com.yoogooo.yoogooosmarthome.Single.Globals;
 import com.yoogooo.yoogooosmarthome.Single.VolleyS;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -70,5 +68,4 @@ public class VoiceControl {
         };
         fRequestQueue.add(postRequest);
     }
-
 }

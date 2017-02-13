@@ -1,17 +1,7 @@
 package com.yoogooo.yoogooosmarthome.Model;
 
-/**
- * Created by Luis Serrano on 26/1/2017.
- */
-
 public class Site {
-    private String id;
-    private String name;
-    private String latitud;
-    private String longitud;
-    private String img;
-    private String ip;
-    private String port;
+    private String id, name, latitud, longitud, img, ip, port;
 
     public Site() {
     }

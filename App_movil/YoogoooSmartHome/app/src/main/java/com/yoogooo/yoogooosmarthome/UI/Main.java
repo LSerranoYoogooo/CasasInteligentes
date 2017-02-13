@@ -28,9 +28,6 @@ import com.yoogooo.yoogooosmarthome.Model.Site;
 import com.yoogooo.yoogooosmarthome.R;
 import com.yoogooo.yoogooosmarthome.Single.Globals;
 import com.yoogooo.yoogooosmarthome.Single.VolleyS;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -114,27 +111,12 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(new Runnable() {
-
             @Override
             public void run() {
                 doubleBackToExitPressedOnce=false;
             }
         }, 2000);
     }
-    /*
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
-        }
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -225,7 +207,6 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                 listEnclouser.add(enclouser);
             }
         }
-
         // Obtener el Recycler
         recycler = (RecyclerView) findViewById(R.id.principal_recycler);
         recycler.setHasFixedSize(true);
@@ -254,5 +235,4 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                 break;
         }
     }
-
 }

@@ -41,11 +41,9 @@ public class Add_site extends AppCompatActivity {
         //obtencion del view actual
         view = findViewById(R.id.content_main);
         global = Globals.getInstance();
-
         name = (TextView) findViewById(R.id.site_name);
         ip = (TextView) findViewById(R.id.ip_add);
         port = (TextView) findViewById(R.id.ip_port);
-
         //boton agregar sitio
         Button btnAddSite = (Button) findViewById(R.id.btnAddSite);
         btnAddSite.setOnClickListener(new View.OnClickListener() {
@@ -64,12 +62,12 @@ public class Add_site extends AppCompatActivity {
                     if(global.getListSite().isEmpty()){
                         tilN.setErrorEnabled(false);
                         //Strings provicionales
-                        site = new Site(global.getUsr_id(), nombre, "0.000.000", "0.000.000", "homecontrol_ejm", dir_ip, dir_port);
+                        site = new Site(global.getUsr_id(), nombre, "0.000.000", "0.000.000", "sala", dir_ip, dir_port);
                         Request(site, "set_default_site.php" , view);
                     } else {
                         tilN.setErrorEnabled(false);
                         //Strings provicionales
-                        site = new Site(global.getUsr_id(), nombre, "0.000.000", "0.000.000", "homecontrol_ejm", dir_ip, dir_port);
+                        site = new Site(global.getUsr_id(), nombre, "0.000.000", "0.000.000", "sala", dir_ip, dir_port);
                         Request(site ,"set_site.php", view);
                     }
                 }

@@ -33,8 +33,8 @@ public class ControlsAdapter extends RecyclerView.Adapter<ControlsAdapter.Contro
                 public void onClick(View v) {
                     //obtencion del id control
                     Globals globals = Globals.getInstance();
-                    Control control = globals.getCtrl(id.getText().toString());
-                    globals.setControl(control);
+                    Control control = globals.getCtrl(id.getText().toString());//obtencion del control sobre el cual se podra ver sus detalles
+                    globals.setControl(control);//almacenamiento del control seleccionado
 
                     Intent intent = new Intent(v.getContext().getApplicationContext(), Control_details.class);
                     v.getContext().startActivity(intent);
@@ -52,7 +52,7 @@ public class ControlsAdapter extends RecyclerView.Adapter<ControlsAdapter.Contro
         return items.size();
     }
 
-    //carga de datos a cada card view y posterior mente al layout correspondiente
+    //carga de datos a cada card view y posteriormente al layout correspondiente
     @Override
     public ControlsAdapter.ControlViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
@@ -62,16 +62,13 @@ public class ControlsAdapter extends RecyclerView.Adapter<ControlsAdapter.Contro
 
     @Override
     public void onBindViewHolder(ControlsAdapter.ControlViewHolder viewHolder, int i) {
-        ImgDefault imgID = new ImgDefault();
         viewHolder.id.setText(items.get(i).getId());
         viewHolder.title.setText(items.get(i).getName());
-        viewHolder.image.setImageResource(imgID.getImageId(items.get(i).getImg()));
+        viewHolder.image.setImageResource(ImgDefault.getImageId(items.get(i).getImg()));
         if(items.get(i).getState().equals("1")){
             viewHolder.state.setImageResource(R.drawable.on);
         } else {
             viewHolder.state.setImageResource(R.drawable.off);
         }
-
-
     }
 }
