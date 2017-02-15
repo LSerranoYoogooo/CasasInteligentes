@@ -18,8 +18,7 @@ import com.yoogooo.yoogooosmarthome.Model.Control;
 import com.yoogooo.yoogooosmarthome.Model.Enclouser;
 import com.yoogooo.yoogooosmarthome.R;
 import com.yoogooo.yoogooosmarthome.Single.Globals;
-import com.yoogooo.yoogooosmarthome.UI.Control_details;
-import com.yoogooo.yoogooosmarthome.Update_enclouser;
+import com.yoogooo.yoogooosmarthome.UI.Update_enclouser;
 
 import java.util.ArrayList;
 import java.util.List;

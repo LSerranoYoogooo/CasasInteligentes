@@ -168,4 +168,8 @@ public class Globals {
     public void setEnclouser(Enclouser enclouser) {
         this.enclouser = enclouser;
     }
+
+    public void destroyEnclouser(){
+        this.enclouser = null;
+    }
 }

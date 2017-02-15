@@ -31,5 +31,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.1.0'
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
+    compile 'com.getbase:floatingactionbutton:1.10.1'
     testCompile 'junit:junit:4.12'
 }
