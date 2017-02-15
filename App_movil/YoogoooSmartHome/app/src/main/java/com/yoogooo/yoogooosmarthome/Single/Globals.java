@@ -15,6 +15,7 @@ public class Globals {
     private ArrayList<Site> listSite;
     private ArrayList<Control> listControl;
     private Control control;
+    private Enclouser enclouser;
     // Restrict the constructor from being instantiated
     private Globals(){}
     //intanciador de la clase bajo los estandares de una clase singleton
@@ -146,5 +147,25 @@ public class Globals {
         this.listEnclouser  = null;
         this.listSite  = null;
         this.listControl  = null;
+    }
+
+    public Enclouser getEnclouserId(String encId){
+        ArrayList<Enclouser> listEnclouser = this.listEnclouser;
+        Enclouser enc = null;
+        for (int i = 0; i < listEnclouser.size(); i++) {
+            Enclouser encTmp = listEnclouser.get(i);
+            if(encTmp.getId().equals(encId)){
+                enc = encTmp;
+            }
+        }
+        return enc;
+    }
+
+    public Enclouser getEnclouser() {
+        return enclouser;
+    }
+
+    public void setEnclouser(Enclouser enclouser) {
+        this.enclouser = enclouser;
     }
 }

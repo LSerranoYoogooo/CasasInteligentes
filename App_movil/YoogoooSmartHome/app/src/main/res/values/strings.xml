@@ -33,4 +33,5 @@
     <string name="add_ctrl_on">Comando de voz encendido</string>
     <string name="add_ctrl_off">comandoo de voz apagado</string>
     <string name="add_ctrl_ch">Canal de control</string>
+    <string name="updateEnclouser">Actualizar Sala</string>
 </resources>

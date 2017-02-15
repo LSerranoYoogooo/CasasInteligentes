@@ -28,7 +28,8 @@
             android:theme="@style/NoActionBar" />
         <activity android:name=".UI.Add_site" />
         <activity android:name=".UI.Add_enclouser" />
-        <activity android:name=".UI.Control_details"></activity>
+        <activity android:name=".UI.Control_details" />
+        <activity android:name=".Update_enclouser"></activity>
     </application>
 
 </manifest>

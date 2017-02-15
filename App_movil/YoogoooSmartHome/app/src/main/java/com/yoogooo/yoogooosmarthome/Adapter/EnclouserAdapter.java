@@ -2,6 +2,7 @@ package com.yoogooo.yoogooosmarthome.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
@@ -17,6 +18,9 @@ import com.yoogooo.yoogooosmarthome.Model.Control;
 import com.yoogooo.yoogooosmarthome.Model.Enclouser;
 import com.yoogooo.yoogooosmarthome.R;
 import com.yoogooo.yoogooosmarthome.Single.Globals;
+import com.yoogooo.yoogooosmarthome.UI.Control_details;
+import com.yoogooo.yoogooosmarthome.Update_enclouser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +66,17 @@ public class EnclouserAdapter extends RecyclerView.Adapter<EnclouserAdapter.Encl
                     MenuItem addEnc = menu.findItem(R.id.add_enclouser);
                     addCtrl.setVisible(true);
                     addEnc.setVisible(false);
+                }
+            });
+
+            v.setOnLongClickListener(new View.OnLongClickListener(){
+
+                @Override
+                public boolean onLongClick(View view) {
+                    globals.setEnclouser(globals.getEnclouserId(enc_id.getText().toString()));
+                    Intent intent = new Intent(view.getContext().getApplicationContext(), Update_enclouser.class);
+                    view.getContext().startActivity(intent);
+                    return true;
                 }
             });
         }
